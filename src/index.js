@@ -4,17 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
-const loader = document.querySelector('.loader');
-
-// if you want to show the loader when React loads data again
-const showLoader = () => loader.classList.remove('loader--hide');
-
-const hideLoader = () => loader.classList.add('loader--hide');
 
 ReactDOM.render(
   <BrowserRouter>
-    <App hideLoader={hideLoader}
-      showLoader={showLoader} />
+    <App />
   </BrowserRouter>,
   document.getElementById('root')
 );

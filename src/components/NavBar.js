@@ -16,37 +16,7 @@ const NavBar = ({ toggle, userID, setUserID }) => {
     const { token, setToken, clearToken } = useToken();
     const user = useContext(UserContext);
 
-    useEffect(() => {
-        if (userID !== null) {
-            const apiEndpoint = "http://localhost:8080/api/v1/user/" + userID
-            // TODO: ADD TRY CATCH HERE
-            // TODO: FIX ALL LOCALHOST TO HOST
-            // TODO: FIX API CALLS TO USE SAME FUNCTION FROM UTILS
-            axios.get(apiEndpoint)
-                .then(res => {
-                    setUserInfo(res.data)
-                })
-                .catch(
-                    () => {
-                        setUserID("")
-                    }
-                )
 
-        }
-    }, [])
-
-    const accountAction = () => {
-        if (userID === null) {
-            const REACT_APP_TWITCH_CLIENT_ID = "by7zl6rwazu7ks1z6sby63bnwq1267"
-            const REACT_APP_TWITCH_REDIRECT_URI = "https://www.fillq.lt/twitchRedirect"
-            var twitchLoginURI = `https://id.twitch.tv/oauth2/authorize?client_id=${REACT_APP_TWITCH_CLIENT_ID}&response_type=code&scope=user:read:email&redirect_uri=${REACT_APP_TWITCH_REDIRECT_URI}`
-            window.location.href = twitchLoginURI
-        }
-        else {
-            localStorage.removeItem("twitchCode")
-            setUserID(null)
-        }
-    }
     const Logout = async () => {
         clearToken()
         window.location.reload(false);
@@ -61,14 +31,7 @@ const NavBar = ({ toggle, userID, setUserID }) => {
             style={{
                 background: "linear-gradient(120deg,#722f818a 0%, rgba(3, 71, 57, 0.7) 100%)"
             }}>
-            <NavLink to="/" className="p-4">
-                <img src={Logo} width="75" alt="fillq logo" />
-            </NavLink>
-            <div className="px-4 cursor-pointer md:hidden" onClick={toggle}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </div>
+            <div></div>
             <div className="pr-8 md:block hidden">
                 <NavLink to="/tournaments" className="p-4 hover:text-purple-400"><span className={location.pathname === "/tournaments" ? " text-purple-500" : ""}>Tournaments</span></NavLink>
                 <NavLink to="/profile" className="p-4 hover:text-purple-400"><span className={location.pathname === "/profile" ? " text-purple-500" : ""}>My Profile</span></NavLink>
