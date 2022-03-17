@@ -1,0 +1,26 @@
+.loader {
+  position: absolute;
+  top: calc(50% - 6em);
+  left: calc(50% - 6em);
+  width: 15em;
+  height: 15em;
+  /* border: 10px solid rgba(255, 255, 255, 0.2); */
+  /* border-left: 10px solid white; */
+  /* border-radius: 50%; */
+  animation: load8 1.5s infinite linear;
+  transition: opacity 0.5s;
+}
+
+.loader--hide {
+  opacity: 0;
+  display: none;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
