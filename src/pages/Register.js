@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { PostRequest } from '../utils/HandleRequest'
 import { ToastContainer, toast } from 'react-toastify';
@@ -23,7 +23,7 @@ const Register = ({ setToken }) => {
   }
 
   return (
-    <div className="bg-white m-16 px-6 py-6 w-80 rounded-md">
+    <div className="bg-white m-16 px-6 py-6 w-80 rounded-md block ml-auto mr-auto">
       <Formik
         initialValues={{
           username: '',

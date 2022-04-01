@@ -1,31 +1,80 @@
 import axios from "axios";
-import useToken from "../components/useToken";
 
 const server = "http://localhost:9000"
 
-export function PostRequest(url, body, token) {
-  var response
-  response = axios
-    .post(server + url, body, { headers: { "Authorization": `Bearer ${token}` } })
+export const UpdateRequest = async (url, body, token) => {
+  var headers = { headers: {} }
+  if (token) {
+    headers = { headers: { "Authorization": `Bearer ${token}` } }
+  }
+
+  return axios
+    .put(server + url, body, headers)
     .then((response) => {
-      return response.data
+      return response
     }).catch(error => {
-      return null
+      if (error.response.status === 403) {
+        localStorage.removeItem('token');
+        window.location.replace("/");
+      }
+      return error.response
     });
-  return response
+}
+
+export const PostRequest = async (url, body, token) => {
+  var headers = { headers: {} }
+  if (token) {
+    headers = { headers: { "Authorization": `Bearer ${token}` } }
+  }
+
+  return axios
+    .post(server + url, body, headers)
+    .then((response) => {
+      return response
+    }).catch(error => {
+      if (error.response.status === 403) {
+        localStorage.removeItem('token');
+        window.location.replace("/");
+      }
+      return error.response
+    });
 }
 
 export const GetRequest = async (url, token) => {
-  // const { token } = useToken();
-  // console.log("TOKEN", token)
+  var headers = { headers: {} }
+  if (token) {
+    headers = { headers: { "Authorization": `Bearer ${token}` } }
+  }
   const response = axios
-    .get(server + url, { headers: { "Authorization": `Bearer ${token}` } })
+    .get(server + url, headers)
     .then((response) => {
-      console.log("response", response)
-      return response.data
+      return response
     }).catch(error => {
+      if (error.response.status === 403) {
+        localStorage.removeItem('token');
+        window.location.replace("/");
+      }
       return error
     });
-
+    
   return response
+}
+
+export const DeleteRequest = async (url, token) => {
+  var headers = { headers: {} }
+  if (token) {
+    headers = { headers: { "Authorization": `Bearer ${token}` } }
+  }
+
+  return axios
+    .delete(server + url, headers)
+    .then((response) => {
+      return response
+    }).catch(error => {
+      if (error.response.status === 403) {
+        localStorage.removeItem('token');
+        window.location.replace("/");
+      }
+      return error.response
+    });
 }

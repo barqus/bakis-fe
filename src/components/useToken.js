@@ -1,10 +1,34 @@
 import { useState } from 'react';
-
+import jwt_decode from 'jwt-decode';
 export default function useToken() {
+  const clearToken = () => {
+    localStorage.removeItem('token');
+  };
+
+
   const getToken = () => {
-    const tokenString = localStorage.getItem('token');
-    const userToken = JSON.parse(tokenString);
-    return userToken
+    try {
+      const tokenString = localStorage.getItem('token');
+      if (!tokenString) {
+        return null
+      }
+      const userToken = JSON.parse(tokenString);
+
+      let decodedToken = jwt_decode(tokenString);
+
+      let currentDate = new Date();
+      // JWT exp is in seconds
+      if (decodedToken.exp * 1000 < currentDate.getTime()) {
+        return null
+      } else {
+
+        return userToken
+      }
+    } catch (err) {
+      clearToken()
+      return null
+    }
+
   };
 
   const [token, setToken] = useState(getToken());
@@ -14,12 +38,20 @@ export default function useToken() {
     setToken(userToken.token);
   };
 
-  const clearToken = () => {
-    localStorage.removeItem('token');
-  };
+  const getRole = () => {
+    try {
+      let decodedToken = jwt_decode(token);
+      return decodedToken.role;
+    } catch {
+      return null
+    }
+  }
+
+
   return {
     clearToken,
     setToken: saveToken,
-    token
+    token,
+    getRole,
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { PostRequest } from '../utils/HandleRequest'
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,18 +14,17 @@ const Login = ({ setToken }) => {
       email: values.email,
       password: values.password
     }, false)
-    console.log('res', response)
-    if (response == null) {
+
+    if (response.data.message != null) {
       notifyError()
     } else {
-      // document.cookie = `token=${response.token}`
-      setToken(response.token);
-      window.location.reload(false);
+      setToken(response.data.token);
+      window.location.replace("/");
     }
   }
 
   return (
-    <div className="bg-white m-16 px-6 py-6 w-80 rounded-md">
+    <div className="bg-white m-16 px-6 py-6 w-80 rounded-md block ml-auto mr-auto">
       <Formik
         initialValues={{
           email: '',
@@ -70,7 +69,7 @@ const Login = ({ setToken }) => {
               {touched.password && <p className="text-red-500 mt-1 text-xs">{errors.password}</p>}
             </div>
             <button disabled={!isValid && !dirty} className={`mt-3 w-64  text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-purple-500" : "bg-gray-500 cursor-default"}`} type="submit">LOGIN</button>
-            <div onClick={() => {navigate("/register");}} className="cursor-pointer text-blue-500 underline text-sm mt-1">
+            <div onClick={() => {navigate("/signup");}} className="cursor-pointer text-blue-500 underline text-sm mt-1">
               Don't have an account? Create one!
             </div>
           </Form>

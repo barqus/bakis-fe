@@ -7,35 +7,27 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { BsInstagram, BsTwitter, BsTwitch } from 'react-icons/bs'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { GetRequest } from '../../utils/HandleRequest'
 
-// TODO: HOW TO IMPLEMENT RECORD THINGIES
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
 
 const PlayerModal = ({ setShowModal, participant }) => {
     const [questions, setQuestions] = useState([])
     const [imageLoaded, setImageLoaded] = useState(true)
 
     useEffect(() => {
-        const apiEndpoint = "http://localhost:8080/api/v1/questions/" + participant.participant_id
-        // TODO: ADD TRY CATCH HERE
-        // TODO: FIX ALL LOCALHOST TO HOST
-        // TODO: FIX API CALLS TO USE SAME FUNCTION FROM UTILS
-        axios.get(apiEndpoint)
-            .then(res => {
-                res.data.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-                // setImage('./Photos/'+participant.nickname.toLowerCase()+'.png')
-                setQuestions(res.data)
-            })
-            .catch(
-                () => {
-                    console.log("err")
-                }
-            )
+
+        const fetchParticipants = async () => {
+            var results = await GetRequest("/participants/"+participant.id+"/qna")
+            if (results.message != null) {
+                setQuestions([])
+            } else {
+                setQuestions(results.data)
+            }
+        };
+
+        fetchParticipants()
     }, [])
+
     const wrapperRef = useRef(null);
     useOutsideAlerter(wrapperRef, setShowModal);
     useKeypress('Escape', () => {
@@ -56,16 +48,7 @@ const PlayerModal = ({ setShowModal, participant }) => {
                                 <div className=" cursor-pointer p-1 ml-auto border-0 text-white float-right text-3xl leading-none font-semibold outline-none focus:outline-none">
                                     <AiOutlineClose onClick={() => setShowModal(false)} />
                                 </div>
-                                {/* <button
-                                className="p-1 ml-auto bg-transparent border-0 text-white opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                onClick={() => setShowModal(false)}
-                            >
-                                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                                    
-                                </span>
-                            </button> */}
                             </div>
-                            {/*body*/}
                             <div className="relative p-6 flex-auto">
                                 <div class="grid md:grid-cols-4 sm:grid-cols-1 gap-4">
                                     <div className="">
@@ -75,22 +58,21 @@ const PlayerModal = ({ setShowModal, participant }) => {
                                         <p className="mt-4 mb-2 text-purple-400">{participant.name}</p>
                                         <p className="my-2 text-purple-400">{participant.surname}</p>
                                         <div className="text-base mt-6">
-                                            <p className="my-2 cursor-pointer" onClick={() => {window.open("https://twitch.tv/"+participant.twitch_channel, "_blank")}}>{participant.twitch_channel.toUpperCase()} <BsTwitch className="text-purple-400 inline" /></p>
+                                            <p className="my-2 cursor-pointer" onClick={() => { window.open("https://twitch.tv/" + participant.twitch_channel, "_blank") }}>{participant.twitch_channel.toUpperCase()} <BsTwitch className="text-purple-400 inline" /></p>
                                             {participant.instagram === "-" ? null :
-                                            <p className="my-2 cursor-pointer" onClick={() => {window.open(participant.instagram, "_blank")}}>{participant.instagram.split("/")[participant.instagram.split("/").length-1].toUpperCase()} <BsInstagram className="inline text-yellow-500" /></p>}
-                                            {participant.twitter === "-" ? null : 
-                                            <p className="my-2 cursor-pointer" onClick={() => {window.open(participant.twitter, "_blank")}}>{participant.twitter.split("/")[participant.twitter.split("/").length-1].toUpperCase()} <BsTwitter className="text-blue-400 inline" /></p>}
+                                                <p className="my-2 cursor-pointer" onClick={() => { window.open(participant.instagram, "_blank") }}>{participant.instagram.split("/")[participant.instagram.split("/").length - 1].toUpperCase()} <BsInstagram className="inline text-yellow-500" /></p>}
+                                            {participant.twitter === "-" ? null :
+                                                <p className="my-2 cursor-pointer" onClick={() => { window.open(participant.twitter, "_blank") }}>{participant.twitter.split("/")[participant.twitter.split("/").length - 1].toUpperCase()} <BsTwitter className="text-blue-400 inline" /></p>}
                                         </div>
 
                                     </div>
                                     <div className="col-span-3 text-left ml-3">
                                         <div className=" max-w-5xl min-w-5xl">
-                                            {/* {questions} */}
                                             {questions.map(item => (
-                                                <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                                                <p className="my-4 text-blueGray-500 text-lg leading-relaxed text-purple-400">
                                                     {item.question.toUpperCase()}
                                                     <br />
-                                                    <p className="mb-2 text-base font-medium">
+                                                    <p className="mb-2 text-base font-medium text-white">
                                                         {item.answer}
                                                     </p>
 
@@ -99,21 +81,8 @@ const PlayerModal = ({ setShowModal, participant }) => {
                                             ))}
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
-                            {/*footer*/}
-                            {/* <div className="flex items-center justify-end p-3 border-t border-solid border-blueGray-200 rounded-b">
-
-                            <button
-                                className="text-red-500 border-2 border-red-500 rounded-md background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="button"
-                                onClick={() => setShowModal(false)}
-                            >
-                                UŽDARYTI
-                            </button>
-                        </div> */}
                         </div>
                     </div>
                 </div>

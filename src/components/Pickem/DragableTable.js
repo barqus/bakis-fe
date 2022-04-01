@@ -6,70 +6,59 @@ import { GiTrophy } from 'react-icons/gi';
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import VIPERLogo from './VIPER.png'
-import ramjpg from './ramai.png'
-import ssdjpg from './ssdas.png'
-import headsetas from './headsetas.png'
 import Countdown from 'react-countdown';
-import { DataGrid } from '@mui/x-data-grid';
 
-// TODO: LEARN HOW SPINNERS AND LOADING  WORKS AND HOW TO USE THEM IN ALL OF THE PROJECT
 const DragableTable = ({ participants }) => {
     const [players, updatePlayers] = useState([]);
     const [userID, setUserID] = useState(0);
     const [userAlreadyPosted, setUserAlreadyPosted] = useState(false);
-    const [loading, setLoading] = useState(true);
+    // TODO: change loading to true
+    const [loading, setLoading] = useState(false);
     const [loadingStandings, setLoadingStandings] = useState(true);
     const [standings, setStandings] = useState([])
-    const [points, setPoints] =useState(0)
+    const [points, setPoints] = useState(0)
     const notify = () => toast.success("IŠSAUGOTA!");
     const notifyError = () => toast.error("Nepavyko išsaugoti...");
     const notifyDeleteError = () => toast.error("Nepavyko ištrinti jūsų pickemų...");
 
 
-
-    const columns = [
-        { field: 'display_name', headerName: 'Slapyvardis', sortable: false,flex: 1 },
-        { field: 'points', headerName: 'Taškai', flex: 1},
-        { field: 'guessed_right', headerName: 'Teisingai Atspėta',flex: 1},
-    ]
-
     useEffect(() => {
-        setUserID(localStorage.getItem('twitchCode'))
-        const fetchData = async () => {
-            const result = await axios(
-                'http://localhost:8080/api/v1/pickems/' + localStorage.getItem('twitchCode')
-            ).catch(err => console.log(err));
-            if (result !== undefined && result.data.length > 0) {
-                updatePlayers(result.data);
-                setUserAlreadyPosted(true)
-            }
-            else {
-                updatePlayers(participants)
-            }
-        };
+        updatePlayers(participants)
+    //     setUserID(localStorage.getItem('twitchCode'))
+    //     const fetchData = async () => {
+    //         const result = await axios(
+    //             'http://localhost:8080/api/v1/pickems/' + localStorage.getItem('twitchCode')
+    //         ).catch(err => console.log(err));
+    //         if (result !== undefined && result.data.length > 0) {
+    //             updatePlayers(result.data);
+    //             setUserAlreadyPosted(true)
+    //         }
+    //         else {
+    //             updatePlayers(participants)
+    //         }
+    //     };
 
-        const fetchPoints = async () => {
-            const result = await axios(
-                'http://localhost:8080/api/v1/pickems/standings/' + localStorage.getItem('twitchCode')
-            ).catch(err => console.log(err));
-            setPoints(result.data)
-        };
+    //     const fetchPoints = async () => {
+    //         const result = await axios(
+    //             'http://localhost:8080/api/v1/pickems/standings/' + localStorage.getItem('twitchCode')
+    //         ).catch(err => console.log(err));
+    //         setPoints(result.data)
+    //     };
 
-        const fetchAllStandings = async () => {
-            const result = await axios(
-                'http://localhost:8080/api/v1/pickems/standings'
-            ).catch(err => console.log(err));
-            result.data.
-            setStandings(result.data)
-            setLoadingStandings(false)
-        };
-        fetchData();
-        fetchPoints();
-        setLoading(false);
-        // fetchAllStandings();
-        // setStandings(standingai.default)
-        
+    //     const fetchAllStandings = async () => {
+    //         const result = await axios(
+    //             'http://localhost:8080/api/v1/pickems/standings'
+    //         ).catch(err => console.log(err));
+    //         result.data.
+    //         setStandings(result.data)
+    //         setLoadingStandings(false)
+    //     };
+    //     fetchData();
+    //     fetchPoints();
+    //     setLoading(false);
+    //     // fetchAllStandings();
+    //     // setStandings(standingai.default)
+
     }, [setUserID, updatePlayers, participants])
 
     function handleOnDragEnd(result) {
@@ -81,6 +70,7 @@ const DragableTable = ({ participants }) => {
 
         updatePlayers(items);
     }
+
     const savePickEms = async () => {
         var objectToPost = []
         if (userAlreadyPosted) {
@@ -127,8 +117,7 @@ const DragableTable = ({ participants }) => {
                             <p className="text-base text-justify m-4">
                                 <p className="">
                                     Stebėsi FILLQ? O gal nori ir prizų laimėti? <br />
-                                    {/* TODO: FIX THIS ONE HYPERLINK TO TABLE */}
-                                    Spėk, kurią vietą užims dalyviai reitingų <span className="underline cursor-pointer text-purple-500" onClick={() => { window.open("https://fillq.lt/", "_blank") }}>lentelėje</span >!<br />
+                                    Spėk, kurią vietą užims dalyviai reitingų <span className="underline cursor-pointer text-purple-500" onClick={() => { window.open("/", "_blank") }}>lentelėje</span >!<br />
                                 </p>
                                 <hr className=" my-6" />
                                 Taškai skaičiuojami taip:
@@ -137,37 +126,12 @@ const DragableTable = ({ participants }) => {
                                     2. Teisingai atspėti Top 3 - papildomai 3 taškai.<br />
                                     3. Teisingai atspėjus daugiau nei 10 - papildomi 3 taškai.<br />
                                 </p> <br />
-                                Spėjimus ir pakeitimus gali atlikti iki Gruodžio 5 dieną 23:59<br />
+                                {/* Spėjimus ir pakeitimus gali atlikti iki Gruodžio 5 dieną 23:59<br /> */}
                                 Daugiausiai taškų surinkę žiūrovai laimės partnerių įsteigtus prizus!<br />
-                            </p>
-                            {/* <p className="text-base text-justify m-4">
-                                Spėk kokioje vietoje bus dalyviai po dviejų savaičių ir surink kuo daugiau tašku. Pakeitimus gali atlikti iki renginio pradžios Gruodžio 4 dieną 12:00
-
-                                Surinkai daugiausiai taškų? Laimėsi partnerių prizus.
-
-                            </p> */}
-                            <hr className=" my-6" />
-                            <p className="pb-4">PRIZAI</p>
-                            <p className="text-base text-justify upper-case">
-                                <p className="">
-                                    • VIPER VPN110 <a href="https://viper.patriotmemory.com/products/solid-state-drives-ssd" className="text-purple-500 cursor underline" >SSD</a>  1TB M.2 PCIe<br />
-
-                                    • PATRIOT VIPER 16 GB <a href="https://viper.patriotmemory.com/products/performance-memory-ram-ddr4-ddr3" className="text-purple-500 cursor underline" >RAM</a> <br />
-
-                                    • PATRIOT VIPER PV380 HEADSET <br />
-                                </p>
-                                <br />
-                                Prizus įsteigė Patriot Viper!
-                                Lyderiaujantys SSD, RAM ir periferijos gamintojai. Įsikūrę 1985 metais Amerikoje. Žaidėjams suteikiantys geriausią galios ir kainos santykį rinkoje.
-                                <p className="text-center mt-6 text-xl">
-                                    NAUJI <a href="https://www.youtube.com/watch?v=pQqMBbQriZg" className="text-purple-500 cursor underline" >DDR5</a>
-                                </p>
-                                <img src={VIPERLogo} className="mt-4" alt="viper logo" />
-
                             </p>
                         </div>
                         <div className="col-span-2 mt-12">
-                            {loading ? "KRAUNAMA..." : <p>ŠIUO METU TAVO SURINKTI TAŠKAI: <span className="text-purple-500 font-bold">{points}</span> </p> }
+                            {/* {loading ? "KRAUNAMA..." : <p>ŠIUO METU TAVO SURINKTI TAŠKAI: <span className="text-purple-500 font-bold">{points}</span> </p>} */}
 
                             {loading ? <p className="text-center mt-2 text-xl">KRAUNAMA...</p> :
                                 <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -206,27 +170,7 @@ const DragableTable = ({ participants }) => {
                                     className="bg-transparent hover:bg-purple-400 text-purple-400 text-lg font-semibold hover:text-white py-1 px-2 border border-purple-400 hover:border-transparent rounded" >
                                     {userAlreadyPosted ? "ATNAUJINTI" : "PASKELBTI"}
                                 </button>}
-                            
                         </div>
-                        <div className="">
-                            <img src={ssdjpg} className="border-1 rounded-xl" alt="SSD" />
-                        </div>
-                        <div className="">
-                            <img src={ramjpg} className="border-1 rounded-xl" alt="RAM" />
-                        </div>
-                        <div>
-                            <img src={headsetas} alt="RAM" className="border-1 rounded-xl" />
-                        </div>
-                            {/* {loadingStandings ? "KRAUNAMA PICKEMŲ ŽIŪROVŲ LENTELĖ..." :
-                            <div style={{ height: '680px', width: '100%' }} className="text-bg bg-white rounded-lg border-2 border-purple-700 col-span-3">
-                                <DataGrid
-                                    rows={standings}
-                                    columns={columns}
-                                    pageSize={10}
-                                    getRowId={(row) => row.user_id}
-                                />
-                            </div>
-                        } */}
                     </div>
 
                     <ToastContainer className="text-xl text-purple-600" position="bottom-right" />
