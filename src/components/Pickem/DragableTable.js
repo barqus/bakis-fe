@@ -7,6 +7,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Countdown from 'react-countdown';
+import useToken from '../useToken';
 
 const DragableTable = ({ participants }) => {
     const [players, updatePlayers] = useState([]);
@@ -20,7 +21,7 @@ const DragableTable = ({ participants }) => {
     const notify = () => toast.success("IŠSAUGOTA!");
     const notifyError = () => toast.error("Nepavyko išsaugoti...");
     const notifyDeleteError = () => toast.error("Nepavyko ištrinti jūsų pickemų...");
-
+    const { token } = useToken();
 
     useEffect(() => {
         updatePlayers(participants)
@@ -165,7 +166,8 @@ const DragableTable = ({ participants }) => {
                                     </Droppable>
                                 </DragDropContext>
                             }
-                            {userID !== null && new Date() < Date.parse("2021-12-05T23:59:59+02:00") &&
+                            {/* TODO: Add date conditional */}
+                            {token &&
                                 <button onClick={() => savePickEms()}
                                     className="bg-transparent hover:bg-purple-400 text-purple-400 text-lg font-semibold hover:text-white py-1 px-2 border border-purple-400 hover:border-transparent rounded" >
                                     {userAlreadyPosted ? "ATNAUJINTI" : "PASKELBTI"}
