@@ -53,10 +53,11 @@ const PlayerModal = ({ setShowModal, participant }) => {
                                 <div class="grid md:grid-cols-4 sm:grid-cols-1 gap-4">
                                     <div className="">
 
-                                        <img style={imageLoaded ? {} : { display: 'none' }} className=" self-center border-2 border-purple-400 border-opacity-60 filter drop-shadow-2xl object-cover mt-5 inline rounded-lg"
-                                            src={participant.description} width="500px" alt="dalyvis" loading="lazy" onLoad={() => setImageLoaded(true)} />
+                                        {/* <img style={imageLoaded ? {} : { display: 'none' }} className=" self-center border-2 border-purple-400 border-opacity-60 filter drop-shadow-2xl object-cover mt-5 inline rounded-lg"
+                                            src={participant.description} width="500px" alt="dalyvis" loading="lazy" onLoad={() => setImageLoaded(true)} /> */}
                                         <p className="mt-4 mb-2 text-purple-400">{participant.name}</p>
                                         <p className="my-2 text-purple-400">{participant.surname}</p>
+                                        <p className=" italic text-sm font-normal">{participant.description}</p>
                                         <div className="text-base mt-6">
                                             <p className="my-2 cursor-pointer" onClick={() => { window.open("https://twitch.tv/" + participant.twitch_channel, "_blank") }}>{participant.twitch_channel.toUpperCase()} <BsTwitch className="text-purple-400 inline" /></p>
                                             {participant.instagram === "-" ? null :

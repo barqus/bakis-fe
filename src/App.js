@@ -16,6 +16,7 @@ import Pickems from './pages/Pickems';
 import Participants from './pages/Participants';
 import Admin from './pages/Admin';
 import History from './pages/History';
+import NotFound from './pages/NotFound';
 
 function App() {
   const { token, setToken, getRole } = useToken();
@@ -85,6 +86,7 @@ function App() {
                   {getRole() === "admin" && <Route path="admin" element={<Admin participants={participants} setParticipants={setParticipants}/> } /> }
 
                   { token && <Route path="pickems" element={<Pickems participants={participants} />} /> }
+                  <Route path="*" element={<NotFound/>} />
                 </Routes>
               </div>
             </Layout>

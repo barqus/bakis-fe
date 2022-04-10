@@ -15,7 +15,7 @@ const Register = ({ setToken }) => {
       email: values.email,
       password: values.password
     })
-    if (response == null) {
+    if (response == null || response.data.message != null && response.data.message !== "Registered successfully") {
         notifyError()
     } else {
       return navigate("/login");

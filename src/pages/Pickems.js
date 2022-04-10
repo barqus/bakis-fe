@@ -1,11 +1,11 @@
 import React from 'react'
-import DragableTable from '../components/Pickem/DragableTable'
+import PickemBox from '../components/Pickem/PickemBox'
 
 const  Pickems = ({participants}) => {
 
     return (
         <div className="mb-24">
-            <DragableTable participants={participants}/>
+            <PickemBox participants={participants}/>
         </div>
     )
 }

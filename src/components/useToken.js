@@ -47,11 +47,20 @@ export default function useToken() {
     }
   }
 
+  const getUserID = () => {
+    try {
+      let decodedToken = jwt_decode(token);
+      return decodedToken.user_id;
+    } catch {
+      return null
+    }
+  }
 
   return {
     clearToken,
     setToken: saveToken,
     token,
     getRole,
+    getUserID,
   }
 }
