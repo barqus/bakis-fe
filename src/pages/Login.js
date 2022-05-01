@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 import { PostRequest } from '../utils/HandleRequest'
 import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-
+import { FaTwitch } from 'react-icons/fa';
 const Login = ({ setToken }) => {
   const notifyError = () => toast.error("Couldn't login");
   let navigate = useNavigate();
@@ -23,6 +23,12 @@ const Login = ({ setToken }) => {
     }
   }
 
+  const onTwitchLogin = () => {
+    const REACT_APP_TWITCH_CLIENT_ID = "035jbf60z40fm7t1mohvsma7ry8x0d"
+    const REACT_APP_TWITCH_REDIRECT_URI = "http://localhost:3000/twitchRedirect"
+    var twitchLoginURI = `https://id.twitch.tv/oauth2/authorize?client_id=${REACT_APP_TWITCH_CLIENT_ID}&response_type=code&scope=user:read:email&redirect_uri=${REACT_APP_TWITCH_REDIRECT_URI}`
+    window.location.href = twitchLoginURI
+}
   return (
     <div className="bg-white m-16 px-6 py-6 w-80 rounded-md block ml-auto mr-auto">
       <Formik
@@ -32,13 +38,11 @@ const Login = ({ setToken }) => {
         }}
         validationSchema={Yup.object({
           email: Yup.string()
-            .email('Invalid email address')
-            .required('Required'),
+            .email('Netinkamas el. paštas')
+            .required('Privaloma'),
           password: Yup.string()
-            .required('No password provided.')
-            .min(8, 'Should be 8 chars minimum.')
-            .max(25, 'Should be 25 chars maximum.')
-            .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+            .required('Privaloma')
+            .min(8, 'Mažiausiai 8 raidės')
         })}
         onSubmit={async (values) => {
           onLogin(values)
@@ -46,13 +50,13 @@ const Login = ({ setToken }) => {
       >
         {({ errors, touched, isValid, dirty }) => (
           <Form className="flex flex-col items-center">
-            <h1 className="mb-2 p-2 font-bold text-purple-700 text-xl">Please login!</h1>
+            <h1 className="mb-2 p-2 font-bold text-purple-700 text-xl">Prisijunkite!</h1>
             <div className="mb-4">
               <Field
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder="El. paštas"
                 className=" w-64 border-2 border-purple-200 p-2 rounded-md"
               />
               {touched.email && <p className="text-red-500 mt-1 text-sm">{errors.email}</p>}
@@ -63,14 +67,21 @@ const Login = ({ setToken }) => {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder="Slaptažodis"
                 className=" w-64 border-2 border-purple-200 p-2 rounded-md"
               />
               {touched.password && <p className="text-red-500 mt-1 text-xs">{errors.password}</p>}
             </div>
-            <button disabled={!isValid && !dirty} className={`mt-3 w-64  text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-purple-500" : "bg-gray-500 cursor-default"}`} type="submit">LOGIN</button>
             <div onClick={() => {navigate("/signup");}} className="cursor-pointer text-blue-500 underline text-sm mt-1">
-              Don't have an account? Create one!
+              Neturi paskyros? Susikurk !
+            </div>
+            <div onClick={() => {navigate("/password/reset");}} className="cursor-pointer text-blue-500 underline text-sm mt-2">
+              Pamiršai salptažodį? Atsinaujink!
+            </div>
+            <button disabled={!isValid && !dirty} className={`mt-3 w-64  text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-purple-500" : "bg-gray-500 cursor-default"}`} type="submit">Prisijungti</button>
+
+            <div onClick={() => onTwitchLogin()} className=" w-64 cursor-pointer mt-4 bg-transparent text-center hover:bg-purple-400 text-purple-400 font-semibold hover:text-white py-1 px-2 border border-purple-400 hover:border-transparent rounded" >
+            PRISIJUNGTI SU TWITCH <FaTwitch className="inline" />
             </div>
           </Form>
         )}

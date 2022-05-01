@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useRef } from 'react';
 import useOutsideAlerter from '../UseOutsideAlerter';
 import { AiOutlineClose } from 'react-icons/ai'
-import { BsInstagram, BsTwitter, BsTwitch } from 'react-icons/bs'
+import { BsInstagram, BsTwitter, BsTwitch, BsYoutube } from 'react-icons/bs'
 import { css } from "@emotion/react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { GetRequest } from '../../utils/HandleRequest'
@@ -60,10 +60,12 @@ const PlayerModal = ({ setShowModal, participant }) => {
                                         <p className=" italic text-sm font-normal">{participant.description}</p>
                                         <div className="text-base mt-6">
                                             <p className="my-2 cursor-pointer" onClick={() => { window.open("https://twitch.tv/" + participant.twitch_channel, "_blank") }}>{participant.twitch_channel.toUpperCase()} <BsTwitch className="text-purple-400 inline" /></p>
-                                            {participant.instagram === "-" ? null :
+                                            {participant.instagram === "-" || participant.instagram === "" ? null :
                                                 <p className="my-2 cursor-pointer" onClick={() => { window.open(participant.instagram, "_blank") }}>{participant.instagram.split("/")[participant.instagram.split("/").length - 1].toUpperCase()} <BsInstagram className="inline text-yellow-500" /></p>}
-                                            {participant.twitter === "-" ? null :
+                                            {participant.twitter === "-" || participant.twitter === "" ? null :
                                                 <p className="my-2 cursor-pointer" onClick={() => { window.open(participant.twitter, "_blank") }}>{participant.twitter.split("/")[participant.twitter.split("/").length - 1].toUpperCase()} <BsTwitter className="text-blue-400 inline" /></p>}
+                                                {participant.twitter === "-" || participant.twitter === "" ? null :
+                                                <p className="my-2 cursor-pointer" onClick={() => { window.open(participant.twitter, "_blank") }}>{participant.youtube.split("/")[participant.youtube.split("/").length - 1].toUpperCase()} <BsYoutube className="text-blue-400 inline" /></p>}
                                         </div>
 
                                     </div>

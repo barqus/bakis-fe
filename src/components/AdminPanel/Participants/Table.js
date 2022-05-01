@@ -42,20 +42,20 @@ const ParticipantTable = ({ participants, setParticipants, setShowForm, setIsEdi
             <table className="divide-y divide-purple-500 text-white">
                 <thead className="font-bold bg-gradient-to-r from-purple-800 to-green-500 ">
                     <tr >
-                        <th scope="col" className="px-6 py-3 text-left text-base  uppercase tracking-wider">
-                            Name
+                        <th scope="col" className="px-6 py-3 text-center text-base  uppercase tracking-wider">
+                            Vardas
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-base  uppercase tracking-wider">
-                            Surname
+                        <th scope="col" className="px-6 py-3 text-center text-base  uppercase tracking-wider">
+                            Pavardė
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-base uppercase tracking-wider">
-                            Nickname
+                        <th scope="col" className="px-6 py-3 text-center text-base uppercase tracking-wider">
+                            Slapyvardis
                         </th>
-                        <th scope="col" className="px-6 py-3 text-left text-base uppercase tracking-wider">
-                            Summoner Name
+                        <th scope="col" className="px-6 py-3 text-center text-base uppercase tracking-wider">
+                            LoL paskyra
                         </th>
-                        <th scope="col" className="px-6 py-3 text-right text-base uppercase tracking-wider">
-                            Twitch Channel
+                        <th scope="col" className="px-6 py-3 text-center text-base uppercase tracking-wider">
+                            Twitch paskyra
                         </th>
                         <th scope="col" className="px-6 py-3 text-center text-base uppercase tracking-wider">
                         </th>
@@ -70,19 +70,19 @@ const ParticipantTable = ({ participants, setParticipants, setShowForm, setIsEdi
                 }} className="bg-white bg-opacity-10   text-base font-semibold divide-y divide-purple-500">
                     {participants.map((item) => (
                         <tr>
-                            <td className="px-6 py-4 whitespace-nowrap text-left">
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
                                 {item.name}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-left">
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
                                 {item.surname}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-left">
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
                                 {item.nickname}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-left">
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
                                 {item.summoner_name}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-left">
+                            <td className="px-6 py-4 whitespace-nowrap text-center">
                                 {item.twitch_channel}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-left">
@@ -94,7 +94,7 @@ const ParticipantTable = ({ participants, setParticipants, setShowForm, setIsEdi
                             <td className="px-6 py-4 whitespace-nowrap text-left">
                                 <button onClick={() => {setShowAnswersModal(true); setParticipantID(item.id)}}
                                     className="flex bg-transparent hover:bg-green-400 text-green-400 font-semibold hover:text-white py-1 px-2 border border-green-400 hover:border-transparent rounded" >
-                                    Answer Questions
+                                    Ataskyti dalyvio klausimus
                                 </button>
                             </td>
                         </tr>

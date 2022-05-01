@@ -18,7 +18,6 @@ import DragableTable from "./DragableTable";
 const PickemBox = ({ participants }) => {
   const [players, setPlayers] = useState(participants);
   const [userAlreadyPosted, setUserAlreadyPosted] = useState(false);
-  // TODO: change loading to true
   const [loading, setLoading] = useState(true);
   // const [points, setPoints] = useState(0);
   const notifySuccess = () => toast.success("Success!");

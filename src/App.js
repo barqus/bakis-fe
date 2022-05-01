@@ -17,6 +17,12 @@ import Participants from './pages/Participants';
 import Admin from './pages/Admin';
 import History from './pages/History';
 import NotFound from './pages/NotFound';
+import Rules from './pages/Rules';
+import Sponsors from './pages/Sponsors';
+import TwitchRedirect from './pages/TwitchRedirect';
+import ResetPassword from './pages/ResetPassword';
+import ActivateRedirect from './pages/ActivateRedirect';
+import PasswordRedirect from './pages/PasswordRedirect';
 
 function App() {
   const { token, setToken, getRole } = useToken();
@@ -79,14 +85,21 @@ function App() {
                 <Routes>
                   <Route exact path="/" element={<Home />} />
                   <Route path="participants" element={<Participants participants={participants} />} />
-                  <Route path="history" element={<History/>} />
+                  <Route path="history" element={<History />} />
                   <Route path="signup" element={<Register />} />
+                  <Route path="information" element={<Rules />} />
+                  <Route path="sponsors" element={<Sponsors />} />
+
+                  <Route path="account/activate" element={<ActivateRedirect />} />
+                  <Route path="twitchRedirect" element={<TwitchRedirect setToken={setToken} />} />
                   <Route path="login" element={<Login setToken={setToken} />} />
+                  <Route path="password/reset" element={<ResetPassword />} />
+                  <Route path="password/redirect" element={<PasswordRedirect />} />
+                  <Route path="" element={<NotFound />} />
+                  {getRole() === "admin" && <Route path="admin" element={<Admin participants={participants} setParticipants={setParticipants} />} />}
 
-                  {getRole() === "admin" && <Route path="admin" element={<Admin participants={participants} setParticipants={setParticipants}/> } /> }
-
-                  { token && <Route path="pickems" element={<Pickems participants={participants} />} /> }
-                  <Route path="*" element={<NotFound/>} />
+                  {token && <Route path="pickems" element={<Pickems participants={participants} />} />}
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>
             </Layout>

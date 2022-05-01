@@ -38,7 +38,7 @@ const QuestionTable = ({ questions, setQuestions, setShowForm, setIsEditing, set
                 <thead className="font-bold bg-gradient-to-r from-purple-800 to-green-500 ">
                     <tr >
                         <th scope="col" className="px-6 py-3 text-left text-base  uppercase tracking-wider">
-                            Question
+                            Klausimas
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-base  uppercase tracking-wider"></th>
                         <th scope="col" className="px-6 py-3 text-left text-base  uppercase tracking-wider"></th>

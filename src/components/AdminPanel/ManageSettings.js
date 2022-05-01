@@ -11,6 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useToken from "../useToken";
 registerLocale("en", en);
+// TODO: add validation of dates
+// TODO: implement usages of dates
 
 const ManageSettings = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -86,7 +88,7 @@ const ManageSettings = () => {
   return (
     <div className="text-lg">
       <form onSubmit={onSubmit} className="">
-        <div class=""> FillQ Start Date</div>
+        <div class=""> FillQ Pradžia</div>
         <div>
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
@@ -98,7 +100,7 @@ const ManageSettings = () => {
             dateFormat="yyyy/MM/dd h:mm aa"
           />
         </div>
-        <div> FillQ End Date</div>
+        <div> FillQ Pabaiga</div>
         <div>
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
@@ -111,7 +113,7 @@ const ManageSettings = () => {
           />
         </div>
 
-        <div> Pickem Start Date</div>
+        <div> Pickem Pradžia</div>
         <div>
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
@@ -123,7 +125,7 @@ const ManageSettings = () => {
             dateFormat="yyyy/MM/dd h:mm aa"
           />
         </div>
-        <div> Pickem End Date</div>
+        <div> Pickem Pabaiga</div>
         <div>
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
@@ -140,7 +142,7 @@ const ManageSettings = () => {
           className="mt-3 text-white p-2 rounded-md text bg-green-500 w-full"
           type="submit"
         >
-          SUBMIT
+          Patvirtinti
         </button>
       </form>
       <ToastContainer

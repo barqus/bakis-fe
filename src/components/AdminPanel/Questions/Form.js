@@ -78,14 +78,14 @@ const QuestionForm = ({
       >
         {({ errors, touched, isValid, dirty }) => (
           <Form className="flex flex-col w-96">
-            <div className="flex text-white mb-1">Question</div>
+            <div className="flex text-white mb-1">Klausimas</div>
             <div className="mb-4">
               <Field
                 id="question"
                 name="question"
                 type="text"
                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                placeHolder="Question"
+                placeHolder="Kokį aukščiausią reitingą esat pasiekęs/us?"
                 component="textarea"
               />
               {touched.question && (
@@ -99,7 +99,7 @@ const QuestionForm = ({
               }`}
               type="submit"
             >
-              {isEditing ? "UPDATE" : "CREATE"}
+              {isEditing ? "Atnaujinti" : "Sukurti"}
             </button>
           </Form>
         )}

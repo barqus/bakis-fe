@@ -33,7 +33,7 @@ const ManageQuestions = () => {
                 <>
                     <button onClick={() => { setShowForm(true); setIsEditing(false) }}
                         className="flex bg-transparent hover:bg-green-400 text-green-400 font-semibold hover:text-white py-1 px-2 border border-green-400 hover:border-transparent rounded" >
-                        Add Question
+                        Pridėti klausimą
                     </button>
                     {showForm ? <QuestionModal setShowForm={setShowForm} setQuestions={setQuestions}
                         questions={questions} notifySuccess={notifySuccess} isEditing={isEditing} editingQuestion={editingQuestion} /> : ""}

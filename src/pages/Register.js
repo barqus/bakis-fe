@@ -6,7 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 const Register = ({ setToken }) => {
-  const notifyError = () => toast.error("Couldn't register");
+  const notifyError = (errMsg) => toast.error(errMsg);
+  const notifySuccess = () => toast.success("Prisiregistravote!");
   let navigate = useNavigate();
 
   const onRegister = async (values) => {
@@ -16,7 +17,14 @@ const Register = ({ setToken }) => {
       password: values.password
     })
     if (response == null || response.data.message != null && response.data.message !== "Registered successfully") {
-        notifyError()
+        let errMsg = "Nepavyko prisiregistruoti, bandykite vėliau..."
+        console.log(response.data.message)
+        if (response.data.message === "email exists") {
+          errMsg = "El. paštas užimtas"
+        } else if (response.data.message === "username exists") {
+          errMsg = "Slapyvardis užimtas"
+        }
+        notifyError(errMsg)
     } else {
       return navigate("/login");
     }
@@ -33,18 +41,17 @@ const Register = ({ setToken }) => {
         }}
         validationSchema={Yup.object({
           username: Yup.string()
-            .required('Required'),
+            .required('Privaloma'),
           email: Yup.string()
-            .email('Invalid email address')
-            .required('Required'),
+            .email('Neteisingas el. paštas')
+            .required('Privaloma'),
           password: Yup.string()
-            .required('No password provided.')
-            .min(8, 'Should be 8 chars minimum.')
-            .max(25, 'Should be 25 chars maximum.')
-            .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+            .required('Privaloma')
+            .min(8, 'Mažiausiai 8 simboliai')
+            .max(25, 'Daugiausiai 25 simboliai'),
           passwordConfirmation: Yup.string()
-            .required('Required')
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+            .required('Privaloma')
+            .oneOf([Yup.ref('password'), null], 'Slaptažodžiai turi sutapti')
         })}
         onSubmit={async (values) => {
           onRegister(values)
@@ -52,13 +59,13 @@ const Register = ({ setToken }) => {
       >
         {({ errors, touched, isValid, dirty }) => (
           <Form className="flex flex-col items-center">
-            <h1 className="mb-2 p-2 font-bold text-purple-700 text-xl">Please register!</h1>
+            <h1 className="mb-2 p-2 font-bold text-purple-700 text-xl">Registracijos forma</h1>
             <div className="mb-4">
               <Field
                 id="username"
                 name="username"
                 type="text"
-                placeholder="Username"
+                placeholder="Slapyvardis"
                 className=" w-64 border-2 border-purple-200 p-2 rounded-md"
               />
               {touched.username && <p className="text-red-500 mt-1 text-sm">{errors.username}</p>}
@@ -68,10 +75,10 @@ const Register = ({ setToken }) => {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Email"
+                placeholder="El. paštas"
                 className=" w-64 border-2 border-purple-200 p-2 rounded-md"
               />
-              {touched.email && <p className="text-red-500 mt-1 text-sm">{errors.email}</p>}
+              {touched.email && <p className="text-red-500 mt-1 text-xs">{errors.email}</p>}
             </div>
 
             <div className="mb-4">
@@ -79,7 +86,7 @@ const Register = ({ setToken }) => {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Password"
+                placeholder="Slaptažodis"
                 className=" w-64 border-2 border-purple-200 p-2 rounded-md"
               />
               {touched.password && <p className="text-red-500 mt-1 text-xs">{errors.password}</p>}
@@ -90,12 +97,12 @@ const Register = ({ setToken }) => {
                 id="passwordConfirmation"
                 name="passwordConfirmation"
                 type="password"
-                placeholder="Password Confirmation"
+                placeholder="Slaptažodžio patvirtinimas"
                 className=" w-64 border-2 border-purple-200 p-2 rounded-md"
               />
               {touched.passwordConfirmation && <p className="text-red-500 mt-1 text-xs">{errors.passwordConfirmation}</p>}
             </div>
-            <button disabled={!isValid && !dirty } className={`mt-3 w-64  text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-purple-500" : "bg-gray-500 cursor-default"}`} type="submit">REGISTER</button>
+            <button disabled={!isValid && !dirty } className={`mt-3 w-64  text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-purple-500" : "bg-gray-500 cursor-default"}`} type="submit">Registruotis</button>
           </Form>
         )}
 

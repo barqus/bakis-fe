@@ -3,7 +3,7 @@ import opgg from './opgg.png'
 import { FaTwitch } from 'react-icons/fa';
 import moment from 'moment';
 import { GetRequest } from '../../utils/HandleRequest';
-//  TODO: Update Twitch Modal
+
 const PlayerTable = () => {
     const [isHovered, setIsHovered] = useState(false)
     const [hoveredAcc, setHoveredAcc] = useState("")
@@ -14,7 +14,7 @@ const PlayerTable = () => {
     const HoverEnter = (nickname, started_at) => {
         setIsHovered(true)
         setHoveredAcc(nickname)
-        const diffInSeconds = moment.utc(moment(moment(), "DD/MM/YYYY HH:mm:ss").diff(moment(moment(started_at), "DD/MM/YYYY HH:mm:ss"))).format("HH:mm:ss")
+        const diffInSeconds = moment.utc(moment(moment(), "DD/MM/YYYY HH:mm:ss").diff(moment(moment(started_at), "DD/MM/YYYY HH:mm:ss"))).format("HH:mm")
         setTimeStreamed(diffInSeconds)
     }
 
@@ -96,11 +96,14 @@ const PlayerTable = () => {
                                                     <span onMouseEnter={() => HoverEnter(item.nickname, item.started_at)} onMouseLeave={() => HoverExit()} onClick={() => { window.open("https://twitch.tv/" + item.twitch_channel, "_blank") }} className="cursor-pointer px-2 inline-flex text-xs leading-5 font-bold rounded-full bg-green-100 text-green-800">
                                                         Transliuoja gyvai!
                                                         {isHovered && hoveredAcc === item.nickname
-                                                            && <div className="absolute self-end right-28 ">
-                                                                <div className="">
+                                                            && <div className="absolute max-w-lg min-w-lg">
+                                                                <div className="flex">
                                                                     <div className="border-2 border-green-800 rounded-md p-2 m-1 bg-green-100 text-green-800">
-                                                                        <p className="font-bold">{item.title}</p>
-                                                                        <p className="text-sm"> {timeStreamed}</p>
+                                                                        <img src={item.thumbnail.replace("{height}", 360).replace("{width}", 640)} alt="thumbnail" />
+                                                                        <p className="font-bold max-w-lg text-sm overflow-hidden">{item.title}</p>
+                                                                        <p className="text-sm">Transliuoja {item.game_name} kategorijoje</p>
+                                                                        <p className="text-sm">Šiuo metu žiūri {item.viewers} žiūrovai</p>
+                                                                        <p className="text-sm">Jau transliuoja {timeStreamed.split(':')[0]} val. {timeStreamed.split(':')[1]} min.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>}

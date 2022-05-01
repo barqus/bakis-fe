@@ -95,7 +95,7 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                 {({ errors, touched, isValid, dirty }) => (
                     <Form className="flex flex-col w-96">
                         <div className="flex text-white mb-1">
-                            Name
+                        Vardas
                         </div>
                         <div className="mb-4">
                             <Field
@@ -103,12 +103,12 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="name"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Name"
+                                placeHolder="Jonas"
                             />
                             {touched.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                         </div>
                         <div className="flex text-white mb-1">
-                        Surname
+                        Pavardė
                         </div>
                         <div className="mb-4">
                             <Field
@@ -116,12 +116,12 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="surname"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Surname"
+                                placeHolder="Jonaitis"
                             />
                             {touched.surname && <p className="text-red-500 text-sm">{errors.surname}</p>}
                         </div>
                         <div className="flex text-white mb-1">
-                            Nickname
+                            Slapyvardis
                         </div>
                         <div className="mb-4">
                             <Field
@@ -129,12 +129,12 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="nickname"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Nickname"
+                                placeHolder="JoJo"
                             />
                             {touched.nickname && <p className="text-red-500 text-sm">{errors.nickname}</p>}
                         </div>
                         <div className="flex text-white mb-1">
-                            About
+                            Apie dalyvį
                         </div>
                         <div className="mb-4">
                             <Field
@@ -142,13 +142,13 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="description"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="About"
+                                placeHolder="Profesionalus žaidėjas 3 metus. Žaidžia europos antroje lygoje."
                                 component="textarea"
                             />
                             {touched.description && <p className="text-red-500 text-sm">{errors.description}</p>}
                         </div>
                         <div className="flex text-white mb-1">
-                            FillQ Summoner Name
+                            FillQ LoL paskyra
                         </div>
                         <div className="mb-4">
                             <Field
@@ -156,12 +156,12 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="summoner_name"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="FillQ Summoner Name"
+                                placeHolder="FillQ-Jojo"
                             />
                             {touched.summoner_name && <p className="text-red-500 text-sm">{errors.summoner_name}</p>}
                         </div>
                         <div className="flex text-white mb-1">
-                            Twitch Channel
+                            Twitch paskyra
                         </div>
                         <div className="mb-4">
                             <Field
@@ -169,7 +169,7 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="twitch_channel"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Twitch Channel"
+                                placeHolder="JojoLive"
                             />
                             {touched.twitch_channel && <p className="text-red-500 text-sm">{errors.twitch_channel}</p>}
                         </div>
@@ -182,7 +182,7 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="instagram"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Instagram"
+                                placeHolder="JojoIg"
                             />
                             {touched.instagram && <p className="text-red-500 text-sm">{errors.instagram}</p>}
                         </div>
@@ -195,7 +195,7 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="twitter"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Twitter"
+                                placeHolder="twtjojo"
                             />
                             {touched.twitter && <p className="text-red-500 text-sm">{errors.twitter}</p>}
                         </div>
@@ -208,12 +208,12 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="youtube"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="Youtube"
+                                placeHolder="ytjojo"
                             />
                             {touched.youtube && <p className="text-red-500 text-sm">{errors.youtube}</p>}
                         </div>
                         <button disabled={!isValid && !dirty} className={`mt-3 text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-green-500" : "bg-gray-500 cursor-default"}`}
-                            type="submit">{isEditing ? "UPDATE" : "CREATE"}</button>
+                            type="submit">{isEditing ? "Atnaujinti" : "Sukurti"}</button>
                     </Form>
                 )}
 
