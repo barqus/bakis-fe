@@ -27,6 +27,15 @@ const PickemBox = ({ participants }) => {
   const user = useContext(UserContext);
 
   useEffect(() => {
+    const fetchParticipants = async () => {
+      var results = await GetRequest("/participants")
+      if (results.message != null) {
+        setPlayers([])
+      } else {
+        setPlayers(results.data.participants)
+      }
+    };
+    fetchParticipants()
     const fetchData = async () => {
       let userID = await getUserID();
       let results = await GetRequest("/pickems/" + userID, token);

@@ -14,30 +14,25 @@ const PasswordRedirect = ({ setToken }) => {
     const navigate = useNavigate();
     useEffect(() => {
         const fetchActivate = async () => {
-            try {
-                const twitchCode = new URLSearchParams(location.search).get("code")
-                await GetRequest("/auth/confirm/" + twitchCode)
-                // setToken(results.data.token);
-                window.location.replace("/");
-            } catch {
-                // clearToken()
-                window.location.replace("/");
-            }
+            // try {
+            //     const twitchCode = new URLSearchParams(location.search).get("code")
+            //     await GetRequest("/auth/confirm/" + twitchCode)
+            //     // setToken(results.data.token);
+            //     window.location.replace("/");
+            // } catch {
+            //     // clearToken()
+            //     window.location.replace("/");
+            // }
         };
 
         fetchActivate()
     }, []);
     const onReset = async (values) => {
-        // var response = await PostRequest("/auth/reset", {
-        //     email: values.email
-        // }, false)
+        await PostRequest("/auth/reset", {
+            email: values.email
+        }, false)
 
-        // // if (response.data.message != null) {
-        // //   notifyError()
-        // // } else {
-        // //   setToken(response.data.token);
-        // //   window.location.replace("/");
-        // // }
+        window.location.replace("/");
         // navigate("/")
     }
 

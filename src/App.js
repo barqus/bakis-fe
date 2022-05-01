@@ -93,8 +93,8 @@ function App() {
                   <Route path="account/activate" element={<ActivateRedirect />} />
                   <Route path="twitchRedirect" element={<TwitchRedirect setToken={setToken} />} />
                   <Route path="login" element={<Login setToken={setToken} />} />
-                  <Route path="password/reset" element={<ResetPassword />} />
-                  <Route path="password/redirect" element={<PasswordRedirect />} />
+                  <Route path="password/redirect" element={<ResetPassword />} />
+                  <Route path="password/reset" element={<PasswordRedirect />} />
                   <Route path="" element={<NotFound />} />
                   {getRole() === "admin" && <Route path="admin" element={<Admin participants={participants} setParticipants={setParticipants} />} />}
 
