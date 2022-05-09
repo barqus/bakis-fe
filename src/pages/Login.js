@@ -75,7 +75,7 @@ const Login = ({ setToken }) => {
             <div onClick={() => {navigate("/signup");}} className="cursor-pointer text-blue-500 underline text-sm mt-1">
               Neturi paskyros? Susikurk !
             </div>
-            <div onClick={() => {navigate("/password/reset");}} className="cursor-pointer text-blue-500 underline text-sm mt-2">
+            <div onClick={() => {navigate("/password/request");}} className="cursor-pointer text-blue-500 underline text-sm mt-2">
               Pamiršai salptažodį? Atsinaujink!
             </div>
             <button disabled={!isValid && !dirty} className={`mt-3 w-64  text-white p-2 rounded-md text ${(isValid && dirty) ? "bg-purple-500" : "bg-gray-500 cursor-default"}`} type="submit">Prisijungti</button>

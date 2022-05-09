@@ -1,13 +1,10 @@
-import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GetRequest } from '../utils/HandleRequest'
 
-const server = "http://localhost:9000"
 
 const TwitchRedirect = ({ setToken }) => {
     const location = useLocation();
-    const navigate = useNavigate();
     useEffect(() => {
         const fetchTwitchLogin = async () => {
             try {

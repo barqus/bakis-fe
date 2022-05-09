@@ -30,6 +30,30 @@ const PlayerTable = () => {
                 setStandings([])
                 setLoading(false)
             } else {
+
+
+                var tierOrdering = {},
+                tierOrder = ['CHALLENGER', 'GRANDMASTER', 'MASTER', 'DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE', 'IRON'];
+                for (var i = 0; i < tierOrder.length; i++)
+                    tierOrdering[tierOrder[i]] = i;
+
+                var rankOrdering = {},
+                    rankOrder = ['I', 'II', 'III', 'IV'];
+                for (i = 0; i < rankOrder.length; i++)
+                    rankOrdering[rankOrder[i]] = i;
+                results.data = results.data.sort(function (a, b) {
+                    let winRateA = (a.wins/(a.wins+a.losses)).toFixed(4)*100 
+                    if (isNaN(winRateA)) {
+                        winRateA = 0
+                    }
+                    let winRateB = (b.wins/(b.wins+b.losses)).toFixed(4)*100 
+                    if (isNaN(winRateB)) {
+                        winRateB = 0
+                    }
+                    return tierOrdering[a.tier] - tierOrdering[b.tier] || rankOrdering[a.rank] - rankOrdering[b.rank] 
+                        || b.points - a.points|| b.is_live - a.is_live || winRateB - winRateA 
+                });
+                console.log("AFTER", results.data)
                 setStandings(results.data)
                 setLoading(false)
             }
@@ -100,10 +124,11 @@ const PlayerTable = () => {
                                                                 <div className="flex">
                                                                     <div className="border-2 border-green-800 rounded-md p-2 m-1 bg-green-100 text-green-800">
                                                                         <img src={item.thumbnail.replace("{height}", 360).replace("{width}", 640)} alt="thumbnail" />
-                                                                        <p className="font-bold max-w-lg text-sm overflow-hidden">{item.title}</p>
-                                                                        <p className="text-sm">Transliuoja {item.game_name} kategorijoje</p>
-                                                                        <p className="text-sm">Šiuo metu žiūri {item.viewers} žiūrovai</p>
-                                                                        <p className="text-sm">Jau transliuoja {timeStreamed.split(':')[0]} val. {timeStreamed.split(':')[1]} min.</p>
+                                                                        <p className="font-bold max-w-lg text-base text-purple-500 overflow-hidden">{item.title}</p>
+                                                                        <p className="text-sm">Transliuoja <span className=" text-purple-500 font-extrabold">{item.game_name}</span> kategorijoje</p>
+                                                                        <p className="text-sm">Šiuo metu žiūri <span className=" text-purple-500 font-extrabold">{item.viewers}</span> žiūrovai</p>
+                                                                        <p className="text-sm">Jau transliuoja <span className=" text-purple-500 font-extrabold">
+                                                                            {timeStreamed.split(':')[0]} val. {timeStreamed.split(':')[1]} min.</span></p>
                                                                     </div>
                                                                 </div>
                                                             </div>}

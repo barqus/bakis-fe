@@ -157,7 +157,7 @@ const PickemBox = ({ participants }) => {
                   onClick={() => savePickEms()}
                   className="bg-transparent hover:bg-purple-400 text-purple-400 text-lg font-semibold hover:text-white py-1 px-2 border border-purple-400 hover:border-transparent rounded"
                 >
-                  {userAlreadyPosted ? "ATNAUJINTI" : "PASKELBTI"}
+                  Išsaugoti
                 </button>
               )}
             </div>

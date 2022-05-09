@@ -23,6 +23,7 @@ import TwitchRedirect from './pages/TwitchRedirect';
 import ResetPassword from './pages/ResetPassword';
 import ActivateRedirect from './pages/ActivateRedirect';
 import PasswordRedirect from './pages/PasswordRedirect';
+import Timeline from './pages/Timeline';
 
 function App() {
   const { token, setToken, getRole } = useToken();
@@ -89,12 +90,13 @@ function App() {
                   <Route path="signup" element={<Register />} />
                   <Route path="information" element={<Rules />} />
                   <Route path="sponsors" element={<Sponsors />} />
+                  <Route path="timeline" element={<Timeline/>} />
 
                   <Route path="account/activate" element={<ActivateRedirect />} />
                   <Route path="twitchRedirect" element={<TwitchRedirect setToken={setToken} />} />
                   <Route path="login" element={<Login setToken={setToken} />} />
-                  <Route path="password/redirect" element={<ResetPassword />} />
-                  <Route path="password/reset" element={<PasswordRedirect />} />
+                  <Route path="password/request" element={<PasswordRedirect />} />
+                  <Route path="password/reset" element={<ResetPassword />} />
                   <Route path="" element={<NotFound />} />
                   {getRole() === "admin" && <Route path="admin" element={<Admin participants={participants} setParticipants={setParticipants} />} />}
 
