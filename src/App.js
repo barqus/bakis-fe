@@ -37,36 +37,36 @@ function App() {
   }
 
   useEffect(() => {
-    const hideMenu = () => {
-      if (window.innerWidth > 768 && isOpen) {
-        setIsOpen(false)
-      }
-    }
-    const fetchUsersData = async () => {
-      try {
-        var results = await GetRequest("/users/", token)
-        setUserObject(results.data)
-      } catch {
-        // clearToken()
-        window.location.reload(false);
-      }
-    };
+    // const hideMenu = () => {
+    //   if (window.innerWidth > 768 && isOpen) {
+    //     setIsOpen(false)
+    //   }
+    // }
+    // const fetchUsersData = async () => {
+    //   try {
+    //     var results = await GetRequest("/users/", token)
+    //     setUserObject(results.data)
+    //   } catch {
+    //     // clearToken()
+    //     window.location.reload(false);
+    //   }
+    // };
 
-    const fetchParticipants = async () => {
-      var results = await GetRequest("/participants")
-      if (results.message != null) {
-        setParticipants([])
-      } else {
-        setParticipants(results.data.participants)
-      }
-    };
+    // const fetchParticipants = async () => {
+    //   var results = await GetRequest("/participants")
+    //   if (results.message != null) {
+    //     setParticipants([])
+    //   } else {
+    //     setParticipants(results.data.participants)
+    //   }
+    // };
 
-    window.addEventListener('resize', hideMenu)
-    if (token !== null) {
-      fetchUsersData()
-    }
+    // window.addEventListener('resize', hideMenu)
+    // if (token !== null) {
+    //   fetchUsersData()
+    // }
 
-    fetchParticipants()
+    // fetchParticipants()
   }, [])
 
   const loadingDone = () => {
