@@ -4,7 +4,7 @@ import QuestionTable from './Questions/Table'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { GetRequest } from '../../utils/HandleRequest'
-// TODO: FIX DUPLICATES
+
 const ManageQuestions = () => {
     const [showForm, setShowForm] = useState(false)
     const [isEditing, setIsEditing] = useState(false)

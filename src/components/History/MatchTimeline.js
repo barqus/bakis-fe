@@ -18,7 +18,6 @@ const MatchTimeline = ({ rtl, timelineData }) => {
   };
 
   const getEventsBetweenTime = (tensOfSeconds) => {
-      // TODO: need to filter events by this range
       console.log(tensOfSeconds)
       if (tensOfSeconds < 1) {
         tensOfSeconds = 0

@@ -63,13 +63,61 @@ export const getMagicalDMGToChampGraphData = (timelineData) => {
           čempionas_7: item.participantFrames["7"].damageStats.magicDamageDoneToChampions,
           čempionas_8: item.participantFrames["8"].damageStats.magicDamageDoneToChampions,
           čempionas_9: item.participantFrames["9"].damageStats.magicDamageDoneToChampions,
-          čempionas_10: item.participantFrames["10"].damageStats.physicalDamageDoneToChampions,
+          čempionas_10: item.participantFrames["10"].damageStats.magicDamageDoneToChampions,
         }
   
         builtMagicalDMGToChamp.push(currentTimeGoldObject)
       })
 
     return builtMagicalDMGToChamp;   
+}
+
+export const getTotalDamageDoneToChampionsGraphData = (timelineData) => {
+  let builtMagicalDMGToChamp = []
+  timelineData.info.frames.map((item) => {
+
+      let currentTimeGoldObject = {
+        timestamp: Math.round((item.timestamp / 1000) / 60),
+        čempionas_1: item.participantFrames["1"].damageStats.totalDamageDoneToChampions,
+        čempionas_2: item.participantFrames["2"].damageStats.totalDamageDoneToChampions,
+        čempionas_3: item.participantFrames["3"].damageStats.totalDamageDoneToChampions,
+        čempionas_4: item.participantFrames["4"].damageStats.totalDamageDoneToChampions,
+        čempionas_5: item.participantFrames["5"].damageStats.totalDamageDoneToChampions,
+        čempionas_6: item.participantFrames["6"].damageStats.totalDamageDoneToChampions,
+        čempionas_7: item.participantFrames["7"].damageStats.totalDamageDoneToChampions,
+        čempionas_8: item.participantFrames["8"].damageStats.totalDamageDoneToChampions,
+        čempionas_9: item.participantFrames["9"].damageStats.totalDamageDoneToChampions,
+        čempionas_10: item.participantFrames["10"].damageStats.totalDamageDoneToChampions,
+      }
+
+      builtMagicalDMGToChamp.push(currentTimeGoldObject)
+    })
+
+  return builtMagicalDMGToChamp;   
+}
+
+export const getMinionGraphData = (timelineData) => {
+  let builtMagicalDMGToChamp = []
+  timelineData.info.frames.map((item) => {
+
+      let currentTimeGoldObject = {
+        timestamp: Math.round((item.timestamp / 1000) / 60),
+        čempionas_1: item.participantFrames["1"].minionsKilled,
+        čempionas_2: item.participantFrames["2"].minionsKilled,
+        čempionas_3: item.participantFrames["3"].minionsKilled,
+        čempionas_4: item.participantFrames["4"].minionsKilled,
+        čempionas_5: item.participantFrames["5"].minionsKilled,
+        čempionas_6: item.participantFrames["6"].minionsKilled,
+        čempionas_7: item.participantFrames["7"].minionsKilled,
+        čempionas_8: item.participantFrames["8"].minionsKilled,
+        čempionas_9: item.participantFrames["9"].minionsKilled,
+        čempionas_10: item.participantFrames["10"].minionsKilled,
+      }
+
+      builtMagicalDMGToChamp.push(currentTimeGoldObject)
+    })
+
+  return builtMagicalDMGToChamp;   
 }
 
 export const parseMatchTimelineData = (timelineData) => {

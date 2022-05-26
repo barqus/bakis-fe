@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { PostRequest, UpdateRequest } from '../../../utils/HandleRequest'
 import useToken from '../../useToken'
 import { ToastContainer, toast } from 'react-toastify';
+import { GetRequest } from '../../../utils/HandleRequest'
 
 const AnswersForm = ({ questions, participantID, notifySuccess, setShowForm }) => {
     const notifyError = (errMsg = "Couldn't add answer to question") => toast.error(errMsg);
@@ -9,7 +10,21 @@ const AnswersForm = ({ questions, participantID, notifySuccess, setShowForm }) =
     const [answers, setAnswers] = useState([]);
     const [answersToSubmit, setAnswersToSubmit] = useState([]);
     const { token } = useToken();
+    useEffect(() => {
 
+    const fetchAnswers= async () => {
+        var results = await GetRequest("/answers/"+participantID).catch((err) => setAnswers([]))
+        if (results == null || results.message != null) {
+          setAnswers([])
+          // setLoading(false)
+        } else {
+          setAnswers(results.data)
+          // setLoading(false)
+        }
+      };    
+      fetchAnswers()
+    
+      }, [])
 
     const submitAnswers = async (e) => {
         e.preventDefault();

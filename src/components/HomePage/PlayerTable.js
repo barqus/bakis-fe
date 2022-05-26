@@ -106,7 +106,7 @@ const PlayerTable = () => {
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-left">
                                                 {item.tier === null ? "Nesužaisti reikiami žaidimai"
-                                                    : <> {item.tier} {item.rank} {item.points} </>
+                                                    : <> {item.tier} {item.rank} {item.league_points} </>
                                                 }
 
                                             </td>

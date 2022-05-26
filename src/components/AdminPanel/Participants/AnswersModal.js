@@ -30,6 +30,7 @@ const AnswersModal = ({ setShowForm, setParticipants, participants, notifySucces
 
     fetchQuestions()
 
+
   }, [])
 
 
@@ -49,7 +50,7 @@ const AnswersModal = ({ setShowForm, setParticipants, participants, notifySucces
             </div>
           </div>
           <div className="flex justify-center">
-            <AnswersForm questions={questions} participantID={participantID} setShowForm={setShowForm} notifySuccess={notifySuccess}/>
+            <AnswersForm questions={questions} participantID={participantID} setShowForm={setShowForm} notifySuccess={notifySuccess} />
           </div>
         </div>
       </div>

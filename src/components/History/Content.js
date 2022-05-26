@@ -28,14 +28,14 @@ const Content = () => {
         setLoadedHistory(history.slice(0, currentCount+10))
     }
     return (
-        <div className="my-6 mx-12 py-6 px-12">
+        <div className="mt-6 mx-12 pt-6 px-12 text-center text-white">
+            <p className="text-white text-3xl font-bold font-sans">
+            DALYVIŲ SUŽAISTŲ ŽAIDIMŲ ISTORIJA
+            </p>
             {
                 !loading &&
-                <div className="my-6 mx-12 p-6 bg-gradient-to-r from-purple-800 to-green-500 shadow overflow-hidden border-2 border-purple-500 bg-opacity-10 sm:rounded-lg text-white"
-                    style={{
-                        background:
-                            "linear-gradient(120deg,#722f818a 40%, rgba(3, 71, 57, 0.8) 100%)",
-                    }}>
+                <div className="mb-6 mx-12 p-6 shadow overflow-hidden "
+                    >
                     <InfiniteScroll
                         dataLength={loadedHistory.length}
                         next={() => fetchMoreData()}

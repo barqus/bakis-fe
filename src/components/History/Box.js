@@ -11,11 +11,40 @@ import {
 } from "react-icons/gi";
 import { format } from "date-fns";
 import Timeline from "../../pages/Timeline";
+import Graph from "../History/Graph";
+import {
+  getGoldTimeGraphData,
+  getPhysicalDMGToChampGraphData,
+  getMagicalDMGToChampGraphData,
+  getTotalDamageDoneToChampionsGraphData,
+  getMinionGraphData,
+  // parseMatchTimelineData,
+} from "../../utils/HandleTimelineData";
+
+import axios from "axios";
+import * as timeline from "../../blobexample/EUW1_5860340252.json";
+import { GetRequest } from "../../utils/HandleRequest";
 
 const Box = ({ matchInformation }) => {
   const [participants, setParticipants] = useState([]);
   const [showGameInformation, setShowGameInformation] = useState(false);
+  const [showGameStats, setShowGameStats] = useState(false);
+
+  const [showGoldStats, setShowGoldStats] = useState(false);
+  const [goldGraph, setGoldGraph] = useState([]);
+
+  const [showPhysDMGToChamp, setShowPhysDMGToChamp] = useState(false);
+  const [physDMGToChamp, setPhysDMGToChamp] = useState([]);
+
+  const [showMinnionsGraph, setShowMinnionsGraph] = useState(false);
+  const [minnions, setMinions] = useState([]);
+
+  const [magDMGToChamp, setMagDMGToChamp] = useState([]);
+  const [dmgToChamp, setDMGToChamp] = useState([]);
+  // const [timelineDataForRange, setTimelineDataForRange] = useState([]);
+
   useEffect(() => {
+
     let allParticipantsInMatch = [];
     matchInformation.teams.forEach((t) => {
       t.players.forEach((p) => {
@@ -26,13 +55,28 @@ const Box = ({ matchInformation }) => {
       });
     });
 
+    // setTimelineDataForRange(parseMatchTimelineData(timeline.default));
+
     setParticipants(allParticipantsInMatch);
   }, []);
 
+  
+  const getMatchJSON = async () => {
+    let output = await GetRequest('/league/history/stats/'+matchInformation.id);
+    setPhysDMGToChamp(getPhysicalDMGToChampGraphData(output.data));
+    setGoldGraph(getGoldTimeGraphData(output.data));
+    setMagDMGToChamp(getMagicalDMGToChampGraphData(output.data));
+    setDMGToChamp(getTotalDamageDoneToChampionsGraphData(output.data));
+    setMinions(getMinionGraphData(output.data));
+  }
+
   return (
-    <div
-    >
-      <div className="text-center flex flex-col justify-around mb-4" onClick={() => setShowGameInformation(!showGameInformation)}>
+    <div>
+      <div className="text-center flex flex-col justify-around mb-4 border-2 rounded-xl p-6"
+        style={{
+          background:
+            "linear-gradient(120deg,#722f818a 40%, rgba(3, 71, 57, 0.8) 100%)",
+        }}>
         <div className="flex justify-between text-lg font-medium ">
           <div>
             {format(Date.parse(matchInformation.start_time), "yyyy/MM/dd H:mm")}{" "}
@@ -40,8 +84,7 @@ const Box = ({ matchInformation }) => {
           <div> {Math.floor(matchInformation.duration)} minutes</div>
         </div>
         {participants.map((p) => (
-          <div className=" ">
-
+          <div className=" " onClick={async () => {setShowGameInformation(!showGameInformation)}}>
             <div
               className={` cursor-pointer border-2  rounded-xl p-4 
             ${p.win
@@ -166,20 +209,73 @@ const Box = ({ matchInformation }) => {
                   ))}
                 </div>
               ))}
-
             </div>
-            
-            <div className="flex justify-center">
-              <Timeline />
+            <div className="flex my-5   ">
+              <button
+                onClick={async () => {setShowGameStats(!showGameStats); await getMatchJSON()}}
+                className="flex text-2xl bg-transparent hover:bg-green-400 text-green-400 font-semibold hover:text-white py-1 px-2 border border-green-400 hover:border-transparent rounded" >
+                {
+                  !showGameStats ? "Atidaryti " : "Uždaryti "
+                } žaidimo statistikas
+              </button>
             </div>
+            {/* <div className="flex justify-center"> */}
+            {
+              showGameStats &&
+              <div className="">
+                <div className="my-4 flex justify-around">
+                  <button
+                    onClick={() => { setShowGoldStats(!showGoldStats); setShowPhysDMGToChamp(false); setShowMinnionsGraph(false) }}
+                    className="flex text-lg bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-1 px-2 border border-yellow-400 hover:border-transparent rounded" >
+                    Peržiūrėti žaidėjų surinkto aukso statistiką
+                  </button>
+                  <button
+                    onClick={() => { setShowPhysDMGToChamp(!showPhysDMGToChamp); setShowGoldStats(false); setShowMinnionsGraph(false) }}
+                    className="flex text-lg bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-1 px-2 border border-yellow-400 hover:border-transparent rounded" >
+                    Peržiūrėti žaidėjų atliktos žalos statistiką
+                  </button>
+                  <button
+                    onClick={() => { setShowPhysDMGToChamp(false); setShowGoldStats(false); setShowMinnionsGraph(!showMinnionsGraph) }}
+                    className="flex text-lg bg-transparent hover:bg-yellow-400 text-yellow-400 font-semibold hover:text-white py-1 px-2 border border-yellow-400 hover:border-transparent rounded" >
+                    Peržiūrėti žaidėjų pakalikų statistiką
+                  </button>
+                </div>
+                <div className="flex justify-center">
+                  {showGoldStats &&
+                    <Graph
+                      title={"Žaidėjo surinkto aukso ir laiko santykis"}
+                      graphData={goldGraph}
+                      lineStroke={"orange"}
+                      team1={matchInformation.teams[0]}
+                      team2={matchInformation.teams[1]}
+                    />
+                  }
+                  {showPhysDMGToChamp &&
+                    <Graph
+                      title={"Žaidėjo atliktos žalos ir laiko santykis"}
+                      graphData={physDMGToChamp}
+                      lineStroke={"rgb(239, 68, 68)"}
+                      team1={matchInformation.teams[0]}
+                      team2={matchInformation.teams[1]}
+                    />
+                  }
 
+                  {showMinnionsGraph &&
+                    <Graph
+                      title={"Žaidėjo užmuštų pakalikų ir laiko santykis"}
+                      graphData={minnions}
+                      lineStroke={"rgb(16, 185, 129)"}
+                      team1={matchInformation.teams[0]}
+                      team2={matchInformation.teams[1]}
+                    />
+                  }
+
+                </div>
+              </div>
+            }
           </div>
-
         }
-
       </div>
-
-
     </div>
   );
 };
