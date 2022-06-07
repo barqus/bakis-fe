@@ -7,7 +7,7 @@ import * as Yup from 'yup'
 import { PostRequest } from '../utils/HandleRequest'
 import { ToastContainer, toast } from 'react-toastify';
 
-const server = "http://localhost:9000"
+const server = "https://fillq-backend-test.azurewebsites.net"
 
 const PasswordRedirect = ({ setToken }) => {
     const location = useLocation();

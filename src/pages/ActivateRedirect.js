@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GetRequest } from '../utils/HandleRequest'
 
-const server = "http://localhost:9000"
+const server = "https://fillq-backend-test.azurewebsites.net"
 
 const ActivateRedirect = ({ setToken }) => {
     const location = useLocation();
