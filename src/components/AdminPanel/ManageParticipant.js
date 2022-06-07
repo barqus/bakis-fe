@@ -9,7 +9,7 @@ const ManageParticipant = ({ participants, setParticipants }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [editingParticipant, setEditingParticipant] = useState(false)
 
-    const notifySuccess = () => toast.success("Success!");
+    const notifySuccess = () => toast.success("Pavyko!");
 
     return (
         <div className="text-lg">

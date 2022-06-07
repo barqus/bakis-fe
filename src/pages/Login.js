@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import { FaTwitch } from 'react-icons/fa';
 const Login = ({ setToken }) => {
-  const notifyError = () => toast.error("Couldn't login");
+  const notifyError = () => toast.error("Nepavyko prisijungti");
   let navigate = useNavigate();
 
   const onLogin = async (values) => {

@@ -21,7 +21,7 @@ const ManageSettings = () => {
   const [pickemEndDate, setPickemEndDate] = useState(new Date());
   const [editing, setEditing] = useState(false);
 
-  const notifyError = (errMsg = "Couldn't update dates") =>
+  const notifyError = (errMsg = "Nepavyko atnaujinti datų") =>
     toast.error(errMsg);
   const notifySuccess = () =>
     toast.success("Success!");

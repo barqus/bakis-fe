@@ -11,7 +11,7 @@ const ManageQuestions = () => {
     const [questions, setQuestions] = useState([])
     const [editingQuestion, setEditingQuestion] = useState(false)
     const [loading, setLoading] = useState(true)
-    const notifySuccess = () => toast.success("Success!");
+    const notifySuccess = () => toast.success("Pavyko!");
 
     useEffect(() => {
         const fetchQuestions = async () => {

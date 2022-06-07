@@ -15,7 +15,7 @@ const QuestionForm = ({
   isEditing,
   editingQuestion,
 }) => {
-  const notifyError = (errMsg = "Couldn't create question") =>
+  const notifyError = (errMsg = "Nepavyko sukurti klausimo") =>
     toast.error(errMsg);
   const { token } = useToken();
 
@@ -66,7 +66,7 @@ const QuestionForm = ({
               }
         }
         validationSchema={Yup.object({
-          question: Yup.string().required("Required"),
+          question: Yup.string().required("Privalomas laukas"),
         })}
         onSubmit={async (values) => {
           if (isEditing) {
@@ -85,7 +85,7 @@ const QuestionForm = ({
                 name="question"
                 type="text"
                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                placeHolder="Kokį aukščiausią reitingą esat pasiekęs/us?"
+                placeHolder="Labiausiai patinkantis LoL veikėjas?"
                 component="textarea"
               />
               {touched.question && (

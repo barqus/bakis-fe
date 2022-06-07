@@ -8,7 +8,7 @@ import { FaTwitch } from 'react-icons/fa';
 import jwt_decode from 'jwt-decode';
 
 const ResetPassword = ({ setToken }) => {
-    const notifyError = () => toast.error("Couldn't login");
+    const notifyError = () => toast.error("Nepavyko prisijungti");
     let navigate = useNavigate();
     const location = useLocation();
 

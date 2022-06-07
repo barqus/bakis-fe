@@ -51,7 +51,7 @@ const PlayerTable = () => {
                         winRateB = 0
                     }
                     return tierOrdering[a.tier] - tierOrdering[b.tier] || rankOrdering[a.rank] - rankOrdering[b.rank] 
-                        || b.points - a.points|| b.is_live - a.is_live || winRateB - winRateA 
+                        || a.points - b.points || winRateB - winRateA || b.is_live - a.is_live 
                 });
                 console.log("AFTER", results.data)
                 setStandings(results.data)
@@ -120,7 +120,7 @@ const PlayerTable = () => {
                                                     <span onMouseEnter={() => HoverEnter(item.nickname, item.started_at)} onMouseLeave={() => HoverExit()} onClick={() => { window.open("https://twitch.tv/" + item.twitch_channel, "_blank") }} className="cursor-pointer px-2 inline-flex text-xs leading-5 font-bold rounded-full bg-green-100 text-green-800">
                                                         Transliuoja gyvai!
                                                         {isHovered && hoveredAcc === item.nickname
-                                                            && <div className="absolute max-w-lg min-w-lg">
+                                                            && <div className="absolute max-w-lg min-w-lg left-2/3">
                                                                 <div className="flex">
                                                                     <div className="border-2 border-green-800 rounded-md p-2 m-1 bg-green-100 text-green-800">
                                                                         <img src={item.thumbnail.replace("{height}", 360).replace("{width}", 640)} alt="thumbnail" />

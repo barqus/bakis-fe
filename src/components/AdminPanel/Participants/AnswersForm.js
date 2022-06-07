@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { GetRequest } from '../../../utils/HandleRequest'
 
 const AnswersForm = ({ questions, participantID, notifySuccess, setShowForm }) => {
-    const notifyError = (errMsg = "Couldn't add answer to question") => toast.error(errMsg);
+    const notifyError = (errMsg = "Nepavyko pridėti atsakymus į klausimus") => toast.error(errMsg);
 
     const [answers, setAnswers] = useState([]);
     const [answersToSubmit, setAnswersToSubmit] = useState([]);

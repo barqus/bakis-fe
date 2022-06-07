@@ -20,9 +20,9 @@ const PickemBox = ({ participants }) => {
   const [userAlreadyPosted, setUserAlreadyPosted] = useState(false);
   const [loading, setLoading] = useState(true);
   // const [points, setPoints] = useState(0);
-  const notifySuccess = () => toast.success("Success!");
-  const notifyError = (msg = "Couldn't save...") => toast.error(msg);
-  const notifyDeleteError = () => toast.error("Couldn't delete...");
+  const notifySuccess = () => toast.success("Pavyko!");
+  const notifyError = (msg = "Nepavyko išsaugoti...") => toast.error(msg);
+  const notifyDeleteError = () => toast.error("Nepavyko atnaujinti...");
   const { token, getUserID } = useToken();
   const user = useContext(UserContext);
 
@@ -92,7 +92,7 @@ const PickemBox = ({ participants }) => {
         if (response == null) {
           notifyError();
         } else if (response.status !== 201) {
-          notifyError(response.data.message);
+          notifyError("Nepavyko išsaugoti, pabandykite perkrauti puslapį.");
         } else {
           setUserAlreadyPosted(true);
           notifySuccess();
@@ -138,7 +138,7 @@ const PickemBox = ({ participants }) => {
                   <br />
                 </p>{" "}
                 <br />
-                Spėjimus ir pakeitimus gali atlikti iki Gruodžio 5 dieną 23:59<br />
+                {/* Spėjimus ir pakeitimus gali atlikti iki Gruodžio 5 dieną 23:59<br /> */}
                 Daugiausiai taškų surinkę žiūrovai laimės partnerių įsteigtus
                 prizus!
                 <br />

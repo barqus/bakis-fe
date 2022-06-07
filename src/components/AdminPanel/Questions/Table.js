@@ -8,8 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const QuestionTable = ({ questions, setQuestions, setShowForm, setIsEditing, setEditingQuestion }) => {
-    const notifyError = (errMsg = "Couldn't delete question") => toast.error(errMsg);
-    const notifySuccess = () => toast.success("Successfully deleted question");
+    const notifyError = (errMsg = "Nepavyko ištrinti klausimo") => toast.error(errMsg);
+    const notifySuccess = () => toast.success("Klausimas sėkmingai ištrintas");
     const { token } = useToken();
     const onDelete = async (questionID) => {
         await DeleteRequest("/questions/" + questionID, token)

@@ -8,7 +8,7 @@ import useToken from '../../useToken'
 import 'react-toastify/dist/ReactToastify.css';
 
 const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuccess, isEditing, editingParticipant }) => {
-    const notifyError = (errMsg = "Couldn't create participant") => toast.error(errMsg);
+    const notifyError = (errMsg = "Nepavyko pridėti dalyvio") => toast.error(errMsg);
     const { token } = useToken();
 
     const onCreate = async (values) => {
@@ -73,15 +73,15 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                     }}
                 validationSchema={Yup.object({
                     name: Yup.string()
-                        .required('Required'),
+                        .required('Privalomas laukas'),
                     surname: Yup.string()
-                        .required('Required'),
+                        .required('Privalomas laukas'),
                     nickname: Yup.string()
-                        .required('Required'),
+                        .required('Privalomas laukas'),
                     summoner_name: Yup.string()
-                        .required('Required'),
+                        .required('Privalomas laukas'),
                     twitch_channel: Yup.string()
-                        .required('Required'),
+                        .required('Privalomas laukas'),
                 })}
                 onSubmit={async (values) => {
                     if (isEditing) {
@@ -156,7 +156,7 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="summoner_name"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="FillQ-Jojo"
+                                placeHolder="reshis"
                             />
                             {touched.summoner_name && <p className="text-red-500 text-sm">{errors.summoner_name}</p>}
                         </div>
@@ -169,7 +169,7 @@ const ParticipantForm = ({ setShowForm, setParticipants, participants, notifySuc
                                 name="twitch_channel"
                                 type="text"
                                 className="w-full border-2 border-purple-200 p-2 rounded-md"
-                                placeHolder="JojoLive"
+                                placeHolder="LEC"
                             />
                             {touched.twitch_channel && <p className="text-red-500 text-sm">{errors.twitch_channel}</p>}
                         </div>

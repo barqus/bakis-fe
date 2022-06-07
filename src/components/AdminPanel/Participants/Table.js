@@ -9,9 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import AnswersModal from './AnswersModal';
 
 const ParticipantTable = ({ participants, setParticipants, setShowForm, setIsEditing, setEditingParticipant }) => {
-    const notifyError = (errMsg = "Couldn't delete participant") => toast.error(errMsg);
-    const notifySuccess = () => toast.success("Successfully deleted participant");
-    const notifyQuestionsSuccess = () => toast.success("Success!");
+    const notifyError = (errMsg = "Nepavyko ištrinti dalyvio") => toast.error(errMsg);
+    const notifySuccess = () => toast.success("Dalyvis sėkmingai pašalintas");
+    const notifyQuestionsSuccess = () => toast.success("Pavyko!");
     const { token } = useToken();
     const [showAnswersModal, setShowAnswersModal] = useState(false)
     const [participantID, setParticipantID] = useState(-1)
