@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { GetRequest } from '../utils/HandleRequest'
 
 
@@ -29,6 +29,7 @@ const TwitchRedirect = ({ setToken }) => {
         //         navigate("/")
         //     })
         //     .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

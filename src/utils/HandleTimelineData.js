@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 export const getGoldTimeGraphData = (timelineData) => {
     let builtGoldGraph = []
     console.log(timelineData, "d")

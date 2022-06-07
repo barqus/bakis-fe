@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { ImExit } from 'react-icons/im'
-import { useContext } from "react";
+// import { useContext } from "react";
 import { useLocation,useNavigate } from 'react-router-dom'
 import useToken from './useToken';
-import UserContext from './UserContext';
+// import UserContext from './UserContext';
 import Logo from './assets/fillq_logo_final.svg';
 
 const NavBar = ({ toggle, userID, setUserID }) => {
@@ -13,7 +13,7 @@ const NavBar = ({ toggle, userID, setUserID }) => {
 
     const location = useLocation();
     const { token, clearToken, getRole } = useToken();
-    const user = useContext(UserContext);
+    // const user = useContext(UserContext);
 
     const Logout = async () => {
         clearToken()

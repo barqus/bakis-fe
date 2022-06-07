@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { format } from "date-fns";
-import { NavLink, useNavigate } from 'react-router-dom'
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai'
 import useToken from '../../useToken'
 import { DeleteRequest } from '../../../utils/HandleRequest'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AnswersModal from './AnswersModal';
 

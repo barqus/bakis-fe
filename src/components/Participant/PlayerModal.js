@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import useKeypress from '../UseKeypress'
-import axios from 'axios';
+
 import { useRef } from 'react';
 import useOutsideAlerter from '../UseOutsideAlerter';
 import { AiOutlineClose } from 'react-icons/ai'
 import { BsInstagram, BsTwitter, BsTwitch, BsYoutube } from 'react-icons/bs'
-import { css } from "@emotion/react";
-import ClipLoader from "react-spinners/ClipLoader";
 import { GetRequest } from '../../utils/HandleRequest'
 
 
 const PlayerModal = ({ setShowModal, participant }) => {
     const [questions, setQuestions] = useState([])
-    const [imageLoaded, setImageLoaded] = useState(true)
 
     useEffect(() => {
 
@@ -26,6 +23,7 @@ const PlayerModal = ({ setShowModal, participant }) => {
         };
 
         fetchParticipants()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const wrapperRef = useRef(null);

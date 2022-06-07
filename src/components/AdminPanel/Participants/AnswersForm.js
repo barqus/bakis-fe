@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { PostRequest, UpdateRequest } from '../../../utils/HandleRequest'
+import { PostRequest } from '../../../utils/HandleRequest'
 import useToken from '../../useToken'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { GetRequest } from '../../../utils/HandleRequest'
 
 const AnswersForm = ({ questions, participantID, notifySuccess, setShowForm }) => {
@@ -24,6 +24,7 @@ const AnswersForm = ({ questions, participantID, notifySuccess, setShowForm }) =
       };    
       fetchAnswers()
     
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
     const submitAnswers = async (e) => {

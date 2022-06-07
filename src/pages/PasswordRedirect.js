@@ -1,17 +1,14 @@
-import axios from 'axios';
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { GetRequest } from '../utils/HandleRequest'
+
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { PostRequest } from '../utils/HandleRequest'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
-const server = "https://fillq-backend-test.azurewebsites.net"
+// const server = "https://fillq-backend-test.azurewebsites.net"
 
 const PasswordRedirect = ({ setToken }) => {
-    const location = useLocation();
-    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchActivate = async () => {
             // try {

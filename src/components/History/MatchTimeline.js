@@ -3,7 +3,6 @@ import { Range, Direction, getTrackBackground } from "react-range";
 
 const STEP = 10000;
 const MIN = 0;
-const MAX = 100;
 
 const MatchTimeline = ({ rtl, timelineData }) => {
   const [values, setValues] = React.useState([0]);

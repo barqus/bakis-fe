@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import {
   GiTwoCoins,
@@ -10,19 +11,15 @@ import {
   GiStoneTower,
 } from "react-icons/gi";
 import { format } from "date-fns";
-import Timeline from "../../pages/Timeline";
 import Graph from "../History/Graph";
 import {
   getGoldTimeGraphData,
   getPhysicalDMGToChampGraphData,
-  getMagicalDMGToChampGraphData,
-  getTotalDamageDoneToChampionsGraphData,
+  // getMagicalDMGToChampGraphData,
+  // getTotalDamageDoneToChampionsGraphData,
   getMinionGraphData,
   // parseMatchTimelineData,
 } from "../../utils/HandleTimelineData";
-
-import axios from "axios";
-import * as timeline from "../../blobexample/EUW1_5860340252.json";
 import { GetRequest } from "../../utils/HandleRequest";
 
 const Box = ({ matchInformation }) => {
@@ -39,8 +36,8 @@ const Box = ({ matchInformation }) => {
   const [showMinnionsGraph, setShowMinnionsGraph] = useState(false);
   const [minnions, setMinions] = useState([]);
 
-  const [magDMGToChamp, setMagDMGToChamp] = useState([]);
-  const [dmgToChamp, setDMGToChamp] = useState([]);
+  // const [magDMGToChamp, setMagDMGToChamp] = useState([]);
+  // const [dmgToChamp, setDMGToChamp] = useState([]);
   // const [timelineDataForRange, setTimelineDataForRange] = useState([]);
 
   useEffect(() => {
@@ -65,8 +62,8 @@ const Box = ({ matchInformation }) => {
     let output = await GetRequest('/league/history/stats/'+matchInformation.id);
     setPhysDMGToChamp(getPhysicalDMGToChampGraphData(output.data));
     setGoldGraph(getGoldTimeGraphData(output.data));
-    setMagDMGToChamp(getMagicalDMGToChampGraphData(output.data));
-    setDMGToChamp(getTotalDamageDoneToChampionsGraphData(output.data));
+    // setMagDMGToChamp(getMagicalDMGToChampGraphData(output.data));
+    // setDMGToChamp(getTotalDamageDoneToChampionsGraphData(output.data));
     setMinions(getMinionGraphData(output.data));
   }
 

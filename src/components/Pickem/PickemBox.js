@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
 import { useState, useEffect } from "react";
 import "./DragableTable.css";
-import { GiTrophy } from "react-icons/gi";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Countdown from "react-countdown";
+
 import useToken from "../useToken";
 import {
   GetRequest,
@@ -35,6 +35,7 @@ const PickemBox = ({ participants }) => {
         setPlayers(results.data.participants)
       }
     };
+    console.log(loading)
     fetchParticipants()
     const fetchData = async () => {
       let userID = await getUserID();
@@ -54,6 +55,7 @@ const PickemBox = ({ participants }) => {
     setLoading(false);
     //     // fetchAllStandings();
     //     // setStandings(standingai.default)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const savePickEms = async () => {

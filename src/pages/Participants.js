@@ -1,7 +1,6 @@
 import React from 'react'
 import PlayerBox from '../components/Participant/PlayerBox'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+
 
 const Participants = ({participants}) => {
     return (

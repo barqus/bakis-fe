@@ -1,13 +1,8 @@
 import React from 'react'
-import axios from 'axios';
 import { NavLink } from 'react-router-dom'
-import { FaTwitch } from 'react-icons/fa';
-import { ImExit } from 'react-icons/im'
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'
 
 const Dropdown = ({isOpen, toggle, userID, setUserID}) => {
-    const [userInfo, setUserInfo] = useState({})
     const location = useLocation();
 
     return ( 

@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   LineChart,
   Line,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
-  Legend,
-  Label
 } from "recharts";
 
 const Graph = ({ graphData, lineStroke, title, team1, team2 }) => {

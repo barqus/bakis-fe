@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Graph from "../components/History/Graph";
-import MatchTimeline from "../components/History/MatchTimeline";
+// import MatchTimeline from "../components/History/MatchTimeline";
 import {
   getGoldTimeGraphData,
   getPhysicalDMGToChampGraphData,
@@ -21,6 +21,7 @@ const Timeline = () => {
     setTimelineDataForRange(parseMatchTimelineData(timeline.default));
     console.log(timelineDataForRange)
     return () => {};
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div>

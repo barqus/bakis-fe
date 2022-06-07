@@ -67,6 +67,7 @@ function App() {
     }
 
     fetchParticipants()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const loadingDone = () => {

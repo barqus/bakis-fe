@@ -3,7 +3,6 @@ import useKeypress from '../../UseKeypress'
 import { useRef } from 'react';
 import useOutsideAlerter from '../../UseOutsideAlerter';
 import { AiOutlineClose } from 'react-icons/ai'
-import ParticipantForm from './Form';
 import { GetRequest } from '../../../utils/HandleRequest'
 import AnswersForm from './AnswersForm';
 

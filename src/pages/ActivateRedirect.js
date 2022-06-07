@@ -1,13 +1,13 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { GetRequest } from '../utils/HandleRequest'
 
-const server = "https://fillq-backend-test.azurewebsites.net"
+// const server = "https://fillq-backend-test.azurewebsites.net"
 
 const ActivateRedirect = ({ setToken }) => {
     const location = useLocation();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     useEffect(() => {
         const fetchActivate = async () => {
             try {
@@ -22,6 +22,7 @@ const ActivateRedirect = ({ setToken }) => {
           };
 
           fetchActivate()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Register = ({ setToken }) => {
   const notifyError = (errMsg) => toast.error(errMsg);
-  const notifySuccess = () => toast.success("Prisiregistravote!");
+  // const notifySuccess = () => toast.success("Prisiregistravote!");
   let navigate = useNavigate();
 
   const onRegister = async (values) => {
@@ -16,6 +16,7 @@ const Register = ({ setToken }) => {
       email: values.email,
       password: values.password
     })
+    // eslint-disable-next-line no-mixed-operators
     if (response == null || response.data.message != null && response.data.message !== "Registered successfully") {
         let errMsg = "Nepavyko prisiregistruoti, bandykite vėliau..."
         console.log(response.data.message)

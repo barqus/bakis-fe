@@ -2,13 +2,13 @@ import React from 'react'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import { PostRequest } from '../utils/HandleRequest'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaTwitch } from 'react-icons/fa';
+
 import jwt_decode from 'jwt-decode';
 
 const ResetPassword = ({ setToken }) => {
-    const notifyError = () => toast.error("Nepavyko prisijungti");
+    // const notifyError = () => toast.error("Nepavyko prisijungti");
     let navigate = useNavigate();
     const location = useLocation();
 

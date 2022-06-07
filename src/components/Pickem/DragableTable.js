@@ -1,6 +1,6 @@
 import React from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState } from "react";
+
 import "./DragableTable.css";
 import { GiTrophy } from "react-icons/gi";
 

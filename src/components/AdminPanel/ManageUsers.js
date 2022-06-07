@@ -25,6 +25,7 @@ const ManageUsers = () => {
         };
         fetchQuestions()
         console.log()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleChange = async (id, role) => {

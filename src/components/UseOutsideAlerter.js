@@ -11,6 +11,7 @@ function useOutsideAlerter(ref,setShowModal) {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ref]);
 }
 export default useOutsideAlerter

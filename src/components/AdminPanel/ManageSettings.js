@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import en from "date-fns/locale/en-IN";
 import "react-datepicker/dist/react-datepicker.css";
 import {
