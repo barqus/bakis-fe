@@ -25,7 +25,7 @@ const Login = ({ setToken }) => {
 
   const onTwitchLogin = () => {
     const REACT_APP_TWITCH_CLIENT_ID = "035jbf60z40fm7t1mohvsma7ry8x0d"
-    const REACT_APP_TWITCH_REDIRECT_URI = "http://localhost:3000/twitchRedirect"
+    const REACT_APP_TWITCH_REDIRECT_URI = "https://icy-desert-048763a03.1.azurestaticapps.net/twitchRedirect"
     var twitchLoginURI = `https://id.twitch.tv/oauth2/authorize?client_id=${REACT_APP_TWITCH_CLIENT_ID}&response_type=code&scope=user:read:email&redirect_uri=${REACT_APP_TWITCH_REDIRECT_URI}`
     window.location.href = twitchLoginURI
 }
