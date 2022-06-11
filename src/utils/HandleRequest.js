@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server = "https://fillq-backend-test.azurewebsites.net"
+const server = "https://fillq-backend.azurewebsites.net"
 // const server = "http://localhost:9000"
 export const UpdateRequest = async (url, body, token) => {
   var headers = { headers: {} }
