@@ -31,7 +31,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [userObject, setUserObject] = useState({ id: "", username: "", email: "" })
   const [participants, setParticipants] = useState([])
-
+  const [settings, setSettings] = useState({})
+  // const [currentDate, setCurrentDate] = useState(new Date())
   const toggle = () => {
     setIsOpen(!isOpen)
   }
@@ -42,6 +43,16 @@ function App() {
         setIsOpen(false)
       }
     }
+
+    const fetchSettings = async () => {
+      var results = await GetRequest("/settings")
+      if (results.message != null) {
+        setSettings({})
+      } else {
+        setSettings(results.data)
+      }
+    };
+
     const fetchUsersData = async () => {
       try {
         var results = await GetRequest("/users/", token)
@@ -61,13 +72,17 @@ function App() {
       }
     };
 
+    // setCurrentDate(new Date())
+
+    fetchSettings()
+
     window.addEventListener('resize', hideMenu)
     if (token !== null) {
       fetchUsersData()
     }
 
     fetchParticipants()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const loadingDone = () => {
@@ -81,18 +96,25 @@ function App() {
         <UserContext.Provider value={userObject}>
           <div className="" >
             <NavBar toggle={toggle} />
+            {/* {Date.parse(settings.start_date) > Date.parse(currentDate) ?
+              (<NotStartedYet startingDate={Date.parse(settings.start_date)} />) :
+              Date.parse(settings.end_date) > Date.parse(currentDate) ?
+                "VYKSTA" :
+                "BAIGES"
+            } */}
+
             <Layout>
+
               <Dropdown isOpen={isOpen} />
               <div className="w-full flow-root justify-center">
                 <Routes>
-                  <Route exact path="/" element={<Home />} />
+                  <Route exact path="/" element={<Home settings={settings}/>} />
                   <Route path="participants" element={<Participants participants={participants} />} />
                   <Route path="history" element={<History />} />
                   <Route path="signup" element={<Register />} />
                   <Route path="information" element={<Rules />} />
                   <Route path="sponsors" element={<Sponsors />} />
-                  <Route path="timeline" element={<Timeline/>} />
-
+                  <Route path="timeline" element={<Timeline />} />
                   <Route path="account/activate" element={<ActivateRedirect />} />
                   <Route path="twitchRedirect" element={<TwitchRedirect setToken={setToken} />} />
                   <Route path="login" element={<Login setToken={setToken} />} />
@@ -100,8 +122,7 @@ function App() {
                   <Route path="password/reset" element={<ResetPassword />} />
                   <Route path="" element={<NotFound />} />
                   {getRole() === "admin" && <Route path="admin" element={<Admin participants={participants} setParticipants={setParticipants} />} />}
-
-                  {token && <Route path="pickems" element={<Pickems participants={participants} />} />}
+                  {token && <Route path="pickems" element={<Pickems participants={participants} settings={settings} />} />}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>

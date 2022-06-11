@@ -30,30 +30,6 @@ const PlayerTable = () => {
                 setStandings([])
                 setLoading(false)
             } else {
-
-
-                var tierOrdering = {},
-                tierOrder = ['CHALLENGER', 'GRANDMASTER', 'MASTER', 'DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE', 'IRON'];
-                for (var i = 0; i < tierOrder.length; i++)
-                    tierOrdering[tierOrder[i]] = i;
-
-                var rankOrdering = {},
-                    rankOrder = ['I', 'II', 'III', 'IV'];
-                for (i = 0; i < rankOrder.length; i++)
-                    rankOrdering[rankOrder[i]] = i;
-                results.data = results.data.sort(function (a, b) {
-                    let winRateA = (a.wins/(a.wins+a.losses)).toFixed(4)*100 
-                    if (isNaN(winRateA)) {
-                        winRateA = 0
-                    }
-                    let winRateB = (b.wins/(b.wins+b.losses)).toFixed(4)*100 
-                    if (isNaN(winRateB)) {
-                        winRateB = 0
-                    }
-                    return tierOrdering[a.tier] - tierOrdering[b.tier] || rankOrdering[a.rank] - rankOrdering[b.rank] 
-                        || a.points - b.points || winRateB - winRateA || b.is_live - a.is_live 
-                });
-                console.log("AFTER", results.data)
                 setStandings(results.data)
                 setLoading(false)
             }

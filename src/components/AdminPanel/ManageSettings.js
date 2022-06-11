@@ -10,6 +10,9 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useToken from "../useToken";
+const { addDays } = require("date-fns");
+
+
 registerLocale("en", en);
 // TODO: add validation of dates
 // TODO: implement usages of dates
@@ -93,7 +96,7 @@ const ManageSettings = () => {
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
             selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={(date) => {setStartDate(date);setEndDate(addDays(date,14))}}
             showTimeSelect
             timeIntervals={10}
             locale="en"
@@ -105,6 +108,7 @@ const ManageSettings = () => {
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
             selected={endDate}
+            disabled={true}
             onChange={(date) => setEndDate(date)}
             showTimeSelect
             timeIntervals={10}
@@ -118,7 +122,7 @@ const ManageSettings = () => {
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
             selected={pickemStartDate}
-            onChange={(date) => setPickemStartDate(date)}
+            onChange={(date) => {setPickemStartDate(date);setPickemEndDate(addDays(date,3))}}            
             showTimeSelect
             timeIntervals={10}
             locale="en"
@@ -130,6 +134,7 @@ const ManageSettings = () => {
           <DatePicker
             className="text-black border-2 border-purple-600 p-2 rounded-md mb-4"
             selected={pickemEndDate}
+            disabled={true}
             onChange={(date) => setPickemEndDate(date)}
             showTimeSelect
             timeIntervals={10}

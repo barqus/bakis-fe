@@ -5,7 +5,7 @@ import "./DragableTable.css";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Countdown from "react-countdown";
 import useToken from "../useToken";
 import {
   GetRequest,
@@ -15,11 +15,11 @@ import {
 import UserContext from "../UserContext";
 import DragableTable from "./DragableTable";
 
-const PickemBox = ({ participants }) => {
+const PickemBox = ({ participants, settings }) => {
   const [players, setPlayers] = useState(participants);
   const [userAlreadyPosted, setUserAlreadyPosted] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const [points, setPoints] = useState(0);
+  const [points, setPoints] = useState(0);
   const notifySuccess = () => toast.success("Pavyko!");
   const notifyError = (msg = "Nepavyko išsaugoti...") => toast.error(msg);
   const notifyDeleteError = () => toast.error("Nepavyko atnaujinti...");
@@ -51,11 +51,23 @@ const PickemBox = ({ participants }) => {
         setLoading(false);
       }
     };
+
+
+    const fetchPickemPoints = async () => {
+      let userID = await getUserID();
+      var results = await GetRequest("/pickems/points/" + userID, token);
+      if (results.message != null) {
+        setPoints(0)
+      } else {
+        setPoints(results.data.totalPoints)
+      }
+    };
     fetchData();
+    fetchPickemPoints();
     setLoading(false);
     //     // fetchAllStandings();
     //     // setStandings(standingai.default)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const savePickEms = async () => {
@@ -106,12 +118,21 @@ const PickemBox = ({ participants }) => {
     <>
       {players.length > 0 && (
         <div className="mt-12 text-center text-white text-3xl font-bold font-sans">
-          {/* {new Date() < Date.parse("2021-12-05T23:59:59+02:00") && (
-            <>
-              IKI PICK'EMS UŽDARYMO LIKO:{" "}
-              <Countdown date={Date.parse("2021-12-05T23:59:59+02:00")} />
-            </>
-          )} */}
+          <div>
+
+          </div>
+          {Date.parse(settings.pickem_start_date) > new Date() ?
+            (<>
+              IKI PICK'EMS ATIDARYMO LIKO:{" "}
+              <Countdown date={Date.parse(settings.pickem_start_date)} />
+            </>) :
+            Date.parse(settings.pickem_end_date) > new Date() ?
+              (<>
+                IKI PICK'EMS UŽDARYMO LIKO:{" "}
+                <Countdown date={Date.parse(settings.pickem_end_date)} />
+              </>) :
+              ("PICK'EMS UŽDARYTI")
+          }
 
           <div className="m grid md:grid-cols-3 sm:grid-cols-1 gap-4 bg-gray-900 mt-6 pr-4 pl-4 rounded-xl pb-7">
             <div className="bg-gray-900 mt-12 m-2 rounded-lg mr-6 ml-4">
@@ -136,25 +157,19 @@ const PickemBox = ({ participants }) => {
                   <br />
                   2. Teisingai atspėti Top 3 - papildomai 3 taškai.
                   <br />
-                  3. Teisingai atspėjus daugiau nei 10 - papildomi 3 taškai.
-                  <br />
+                  {/* 3. Teisingai atspėjus daugiau nei 10 - papildomi 3 taškai.
+                  <br /> */}
                 </p>{" "}
                 <br />
-                {/* Spėjimus ir pakeitimus gali atlikti iki Gruodžio 5 dieną 23:59<br /> */}
                 Daugiausiai taškų surinkę žiūrovai laimės partnerių įsteigtus
                 prizus!
                 <br />
               </p>
             </div>
             <div className="col-span-2 mt-12">
-            <DragableTable players={players} setPlayers={setPlayers}/>
-              {/* {loading ? (
-                <div className="text-center mt-2 text-xl">KRAUNAMA...</div>
-              ) : (
-                  <DragableTable players={players} setPlayers={setPlayers}/>
-              )} */}
-              {/* TODO: Add date conditional */}
-              {token && (
+            ŠIUO METU JŪSŲ TURIMI TAŠKAI: {points}
+              <DragableTable players={players} setPlayers={setPlayers} />
+              {token && Date.parse(settings.pickem_start_date) < new Date() && Date.parse(settings.pickem_end_date) > new Date() && (
                 <button
                   onClick={() => savePickEms()}
                   className="bg-transparent hover:bg-purple-400 text-purple-400 text-lg font-semibold hover:text-white py-1 px-2 border border-purple-400 hover:border-transparent rounded"
