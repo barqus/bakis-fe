@@ -19,7 +19,7 @@ const Content = () => {
                 setHistory([])
                 setLoading(false)
             } else {
-                setHistory(results.data.output)
+                setHistory(results.data.history)
                 // setLoadedHistory(results.data.slice(0, currentCount))
                 setLoading(false)
             }
@@ -35,7 +35,7 @@ const Content = () => {
         if (results.message != null) {
             setHistory([])
         } else {
-            setHistory(history => [...history,...results.data.output])
+            setHistory(history => [...history,...results.data.history])
         }
         console.log(results, history)
         if (results.data.meta.nextPage == null) {
